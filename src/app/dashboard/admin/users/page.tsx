@@ -65,15 +65,15 @@ export default function UsersPage() {
               error={error}
             />
 
-            {data?.total_pages && data.total_pages > 1 && (
+            {data && data.total_pages > 1 ? (
               <div className="mt-4 flex justify-center">
                 <Pagination
-                  currentPage={data?.current_page ?? 1}
-                  totalPages={data?.total_pages ?? 1}
+                  currentPage={data.current_page > 0 ? data.current_page : 1}
+                  totalPages={data.total_pages}
                   onPageChange={setPage}
                 />
               </div>
-            )}
+            ) : null}
           </UsersCard>
         </div>
       </SidebarInset>

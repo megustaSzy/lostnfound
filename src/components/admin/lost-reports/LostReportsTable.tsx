@@ -151,12 +151,16 @@ export default function LostReportsTable() {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[60px] text-center">No</TableHead>
-                  <TableHead className="text-center">Barang</TableHead>
-                  <TableHead className="text-center">Lokasi</TableHead>
-                  <TableHead className="text-center">Pelapor</TableHead>
-                  <TableHead className="text-center">Tanggal</TableHead>
-                  <TableHead className="text-center">Status</TableHead>
-                  <TableHead className="text-center">Aksi</TableHead>
+                  <TableHead className="min-w-[180px]">Barang</TableHead>
+                  <TableHead className="min-w-[200px]">Lokasi</TableHead>
+                  <TableHead className="min-w-[200px]">Pelapor</TableHead>
+                  <TableHead className="w-[140px] text-center">
+                    Tanggal
+                  </TableHead>
+                  <TableHead className="w-[120px] text-center">
+                    Status
+                  </TableHead>
+                  <TableHead className="w-[140px] text-center">Aksi</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -166,34 +170,51 @@ export default function LostReportsTable() {
                     key={r.id}
                     className="hover:bg-muted/50 transition-colors"
                   >
+                    {/* No */}
                     <TableCell className="text-center font-medium">
                       {(data.current_page - 1) * data.limit + (i + 1)}
                     </TableCell>
+
+                    {/* Barang */}
                     <TableCell>
-                      <p className="font-semibold text-sm">{r.namaBarang}</p>
+                      <p className="font-semibold text-sm leading-tight">
+                        {r.namaBarang}
+                      </p>
                     </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="h-3 w-3" />
-                        <span className="truncate">{r.lokasiHilang}</span>
+
+                    {/* Lokasi */}
+                    <TableCell>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <MapPin className="h-4 w-4 shrink-0" />
+                        <span className="line-clamp-1">{r.lokasiHilang}</span>
                       </div>
                     </TableCell>
-                    <TableCell className="text-sm">
-                      <p className="font-medium">{r.user?.name}</p>
+
+                    {/* Pelapor */}
+                    <TableCell>
+                      <p className="font-medium text-sm leading-tight">
+                        {r.user?.name}
+                      </p>
                       <p className="text-xs text-muted-foreground">
                         {r.user?.email}
                       </p>
                     </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
+
+                    {/* Tanggal */}
+                    <TableCell className="text-center text-sm text-muted-foreground">
                       {r.tanggal
                         ? formatDate(r.tanggal)
                         : r.createdAt
                         ? formatDate(r.createdAt)
                         : "-"}
                     </TableCell>
+
+                    {/* Status */}
                     <TableCell className="text-center">
                       <LostReportsStatusBadge status={r.status} />
                     </TableCell>
+
+                    {/* Aksi */}
                     <TableCell className="text-center">
                       <div className="flex justify-center gap-2">
                         {r.status === "PENDING" && (
@@ -215,6 +236,7 @@ export default function LostReportsTable() {
                                 <Check className="h-4 w-4" />
                               )}
                             </Button>
+
                             <Button
                               size="icon"
                               variant="outline"
@@ -234,6 +256,7 @@ export default function LostReportsTable() {
                             </Button>
                           </>
                         )}
+
                         <Button
                           size="icon"
                           variant="outline"

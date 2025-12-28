@@ -144,10 +144,10 @@ export default function LostReportsTable() {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[60px] text-center">No</TableHead>
-                  <TableHead>Barang</TableHead>
-                  <TableHead>Deskripsi</TableHead>
-                  <TableHead>Lokasi</TableHead>
-                  <TableHead>Pelapor</TableHead>
+                  <TableHead className="text-center">Barang</TableHead>
+                  <TableHead className="text-center">Lokasi</TableHead>
+                  <TableHead className="text-center">Pelapor</TableHead>
+                  <TableHead className="text-center">Tanggal</TableHead>
                   <TableHead className="text-center">Status</TableHead>
                   <TableHead className="text-center">Aksi</TableHead>
                 </TableRow>
@@ -165,9 +165,6 @@ export default function LostReportsTable() {
                     <TableCell>
                       <p className="font-semibold text-sm">{r.namaBarang}</p>
                     </TableCell>
-                    <TableCell className="max-w-[220px] truncate text-sm text-muted-foreground">
-                      {r.deskripsi}
-                    </TableCell>
                     <TableCell className="text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <MapPin className="h-3 w-3" />
@@ -179,6 +176,9 @@ export default function LostReportsTable() {
                       <p className="text-xs text-muted-foreground">
                         {r.user?.email}
                       </p>
+                    </TableCell>
+                    <TableCell>
+                      <p className="text-xs text-muted-foreground">{r.tanggal}</p>
                     </TableCell>
                     <TableCell className="text-center">
                       <LostReportsStatusBadge status={r.status} />

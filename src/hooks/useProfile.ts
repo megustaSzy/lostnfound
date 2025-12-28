@@ -8,12 +8,13 @@ export function useProfile(
   user: User | null,
   refreshUser: () => Promise<void>
 ) {
-  const [formData, setFormData] = useState<ProfileFormData>({
+  const [formData, setFormData] = useState<any>({
     name: "",
     email: "",
     notelp: "",
     password: "",
     image: null,
+    imagePreview: "",
   });
 
   const [saving, setSaving] = useState(false);
@@ -27,23 +28,25 @@ export function useProfile(
         notelp: user.notelp || "",
         password: "",
         image: null,
+        imagePreview: user.imageUrl || "",
       });
     }
   }, [user]);
 
+  // 🔥 KHUSUS AVATAR
+  const handleAvatarChange = (file: File) => {
+    setFormData((prev: any) => ({
+      ...prev,
+      image: file,
+      imagePreview: URL.createObjectURL(file),
+    }));
+  };
+
   // input text
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
 
-    if (name === "image" && files) {
-      setFormData((prev) => ({
-        ...prev,
-        image: files[0],
-      }));
-      return;
-    }
-
-    setFormData((prev) => ({
+    setFormData((prev: any) => ({
       ...prev,
       [name]: value,
     }));
@@ -55,13 +58,13 @@ export function useProfile(
     try {
       setSaving(true);
 
-      const payload = new window.FormData();
+      const payload = new FormData();
 
       if (formData.name !== user.name) payload.append("name", formData.name);
       if (formData.email !== user.email)
         payload.append("email", formData.email);
       if (formData.notelp !== user.notelp)
-        payload.append("notelp", formData.notelp || "");
+        payload.append("notelp", formData.notelp);
       if (formData.password) payload.append("password", formData.password);
       if (formData.image) payload.append("image", formData.image);
 
@@ -70,7 +73,7 @@ export function useProfile(
       await refreshUser();
       setMessage({ type: "success", text: "Profile berhasil diperbarui!" });
 
-      setFormData((prev) => ({
+      setFormData((prev: any) => ({
         ...prev,
         password: "",
         image: null,
@@ -92,5 +95,6 @@ export function useProfile(
     message,
     handleChange,
     handleSave,
+    handleAvatarChange, 
   };
 }

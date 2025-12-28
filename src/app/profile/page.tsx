@@ -47,7 +47,13 @@ export default function ProfilePage() {
           <ProfileAlert message={profile.message} />
 
           <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <ProfileCard user={user} />
+            <ProfileCard
+              user={{
+                ...user,
+                imageUrl: profile.formData.imagePreview || user.imageUrl,
+              }}
+              onAvatarChange={profile.handleAvatarChange}
+            />
 
             <ProfileForm
               formData={profile.formData}

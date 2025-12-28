@@ -155,13 +155,13 @@ export default function LostReportsTable() {
                     <TableHead className="w-[60px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       No
                     </TableHead>
-                    <TableHead className="min-w-[200px] text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <TableHead className="w-[160px] text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Barang
                     </TableHead>
-                    <TableHead className="min-w-[200px] text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <TableHead className="w-[160px] text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Lokasi
                     </TableHead>
-                    <TableHead className="min-w-[180px] text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <TableHead className="w-[160px] text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Pelapor
                     </TableHead>
                     <TableHead className="w-[140px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">

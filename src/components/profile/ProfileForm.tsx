@@ -59,6 +59,20 @@ export function ProfileForm({
             />
           </div>
 
+          {/* Avatar */}
+          <div className="space-y-2">
+            <Label className="text-black font-medium text-sm">
+              Profile Image
+            </Label>
+            <Input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleChange}
+              className="bg-white border-gray-300 text-black"
+            />
+          </div>
+
           <Separator />
 
           {/* Password */}

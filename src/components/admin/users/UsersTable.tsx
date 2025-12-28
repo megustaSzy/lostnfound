@@ -55,59 +55,101 @@ export function UsersTable({
   }
 
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[60px] text-center">No</TableHead>
-            <TableHead>Nama</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>No. Telp</TableHead>
-            <TableHead className="text-center">Role</TableHead>
-            <TableHead className="text-center w-[100px]">Aksi</TableHead>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {users && users.length > 0 ? (
-            users.map((u, idx) => (
-              <Row key={u.id}>
-                <TableCell className="text-center font-medium">
-                  {(safePage - 1) * safeLimit + (idx + 1)}
-                </TableCell>
-                <TableCell className="font-medium">{u.name}</TableCell>
-                <TableCell className="text-muted-foreground">
-                  {u.email}
-                </TableCell>
-                <TableCell className="text-muted-foreground">
-                  {u.notelp || "-"}
-                </TableCell>
-                <TableCell className="text-center">
-                  <Badge
-                    variant={
-                      u.role.toLowerCase() === "admin" ? "default" : "secondary"
-                    }
-                  >
-                    {u.role}
-                  </Badge>
-                </TableCell>
-                <TableCell className="text-center">
-                  <UserActions user={u} />
-                </TableCell>
-              </Row>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell
-                colSpan={6}
-                className="h-32 text-center text-muted-foreground"
-              >
-                Tidak ada data user
-              </TableCell>
+    <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
+      <div className="overflow-x-auto">
+        <Table className="table-fixed w-full">
+          {/* ===== HEADER ===== */}
+          <TableHeader>
+            <TableRow className="bg-gray-50 border-b border-gray-200">
+              <TableHead className="w-[60px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                No
+              </TableHead>
+              <TableHead className="w-[200px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Nama
+              </TableHead>
+              <TableHead className="w-[240px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Email
+              </TableHead>
+              <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                No. Telp
+              </TableHead>
+              <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Role
+              </TableHead>
+              <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Aksi
+              </TableHead>
             </TableRow>
-          )}
-        </TableBody>
-      </Table>
+          </TableHeader>
+
+          {/* ===== BODY ===== */}
+          <TableBody className="divide-y divide-gray-200">
+            {users && users.length > 0 ? (
+              users.map((u, idx) => (
+                <TableRow
+                  key={u.id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
+                  {/* No */}
+                  <TableCell className="px-4 py-4 text-center text-sm font-medium text-gray-900">
+                    {(safePage - 1) * safeLimit + (idx + 1)}
+                  </TableCell>
+
+                  {/* Nama */}
+                  <TableCell className="px-4 py-4 text-center">
+                    <p className="text-sm font-medium text-gray-900 line-clamp-1">
+                      {u.name}
+                    </p>
+                  </TableCell>
+
+                  {/* Email */}
+                  <TableCell className="px-4 py-4 text-center">
+                    <p className="text-xs text-gray-600 line-clamp-1">
+                      {u.email}
+                    </p>
+                  </TableCell>
+
+                  {/* No Telp */}
+                  <TableCell className="px-4 py-4 text-center">
+                    <p className="text-xs text-gray-600">{u.notelp || "-"}</p>
+                  </TableCell>
+
+                  {/* Role */}
+                  <TableCell className="px-4 py-4 text-center">
+                    <div className="flex justify-center">
+                      <Badge
+                        variant={
+                          u.role.toLowerCase() === "admin"
+                            ? "default"
+                            : "secondary"
+                        }
+                      >
+                        {u.role}
+                      </Badge>
+                    </div>
+                  </TableCell>
+
+                  {/* Aksi */}
+                  <TableCell className="px-4 py-4 text-center">
+                    <div className="flex justify-center">
+                      <UserActions user={u} />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={6}
+                  className="h-32 text-center text-sm text-gray-500"
+                >
+                  Tidak ada data user
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }

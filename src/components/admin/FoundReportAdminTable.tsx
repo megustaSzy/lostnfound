@@ -128,80 +128,120 @@ export default function FoundReportAdminTable() {
             </p>
           </div>
         ) : (
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[60px] text-center">No</TableHead>
-                  <TableHead>Barang</TableHead>
-                  <TableHead>Deskripsi</TableHead>
-                  <TableHead>Lokasi</TableHead>
-                  <TableHead>Pelapor</TableHead>
-                  <TableHead className="text-center">Status</TableHead>
-                  <TableHead className="text-center">Detail</TableHead>
-                </TableRow>
-              </TableHeader>
-
-              <TableBody>
-                {reports.map((report, idx) => (
-                  <TableRow
-                    key={report.id}
-                    className="hover:bg-muted/50 transition-colors"
-                  >
-                    <TableCell className="text-center font-medium">
-                      {(currentPage - 1) * rowLimit + (idx + 1)}
-                    </TableCell>
-                    <TableCell className="font-medium">
-                      {getNamaBarang(report)}
-                    </TableCell>
-                    <TableCell className="max-w-[220px] truncate text-sm text-muted-foreground">
-                      {getDeskripsi(report)}
-                    </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <MapPin className="h-3 w-3" />
-                        <span className="truncate">{getLokasi(report)}</span>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Avatar className="h-8 w-8">
-                          <AvatarFallback>
-                            {getAvatarLetter(report)}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div className="leading-tight">
-                          <p className="text-sm font-medium">
-                            {getPelapor(report)}
-                          </p>
-                          {getTelp(report) && (
-                            <p className="text-xs text-muted-foreground">
-                              {getTelp(report)}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-center">
-                      <Badge
-                        variant={getStatusBadge(report.statusFound).variant}
-                      >
-                        {getStatusBadge(report.statusFound).label}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-center">
-                      <Button
-                        size="icon"
-                        variant="outline"
-                        onClick={() => setSelectedReport(report)}
-                      >
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                    </TableCell>
+          <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <Table className="table-fixed w-full">
+                {/* ===== HEADER ===== */}
+                <TableHeader>
+                  <TableRow className="bg-gray-50 border-b border-gray-200">
+                    <TableHead className="w-[60px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      No
+                    </TableHead>
+                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Barang
+                    </TableHead>
+                    <TableHead className="w-[220px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Deskripsi
+                    </TableHead>
+                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Lokasi
+                    </TableHead>
+                    <TableHead className="w-[200px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Pelapor
+                    </TableHead>
+                    <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Status
+                    </TableHead>
+                    <TableHead className="w-[100px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      Detail
+                    </TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+
+                {/* ===== BODY ===== */}
+                <TableBody className="divide-y divide-gray-200">
+                  {reports.map((report, idx) => (
+                    <TableRow
+                      key={report.id}
+                      className="hover:bg-gray-50 transition-colors"
+                    >
+                      {/* No */}
+                      <TableCell className="px-4 py-4 text-center text-sm font-medium text-gray-900">
+                        {(currentPage - 1) * rowLimit + (idx + 1)}
+                      </TableCell>
+
+                      {/* Barang */}
+                      <TableCell className="px-4 py-4 text-center">
+                        <p className="text-sm font-semibold text-gray-900 line-clamp-1">
+                          {getNamaBarang(report)}
+                        </p>
+                      </TableCell>
+
+                      {/* Deskripsi */}
+                      <TableCell className="px-4 py-4 text-center">
+                        <p className="text-xs text-gray-600 line-clamp-2">
+                          {getDeskripsi(report)}
+                        </p>
+                      </TableCell>
+
+                      {/* Lokasi */}
+                      <TableCell className="px-4 py-4 text-center">
+                        <div className="flex items-center justify-center gap-1.5">
+                          <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+                          <span className="text-xs text-gray-600 line-clamp-1">
+                            {getLokasi(report)}
+                          </span>
+                        </div>
+                      </TableCell>
+
+                      {/* Pelapor */}
+                      <TableCell className="px-4 py-4 text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <Avatar className="h-8 w-8">
+                            <AvatarFallback>
+                              {getAvatarLetter(report)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="text-center leading-tight">
+                            <p className="text-sm font-medium text-gray-900">
+                              {getPelapor(report)}
+                            </p>
+                            {getTelp(report) && (
+                              <p className="text-xs text-gray-500">
+                                {getTelp(report)}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </TableCell>
+
+                      {/* Status */}
+                      <TableCell className="px-4 py-4 text-center">
+                        <div className="flex justify-center">
+                          <Badge
+                            variant={getStatusBadge(report.statusFound).variant}
+                          >
+                            {getStatusBadge(report.statusFound).label}
+                          </Badge>
+                        </div>
+                      </TableCell>
+
+                      {/* Detail */}
+                      <TableCell className="px-4 py-4 text-center">
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          className="h-8 w-8"
+                          onClick={() => setSelectedReport(report)}
+                        >
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         )}
       </CardContent>

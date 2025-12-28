@@ -101,67 +101,112 @@ export default function LostReportTable() {
               ))}
             </div>
           ) : data?.items.length ? (
-            <div className="rounded-md border">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[60px] text-center">No</TableHead>
-                    <TableHead>Barang</TableHead>
-                    <TableHead>Deskripsi</TableHead>
-                    <TableHead>Lokasi</TableHead>
-                    <TableHead>Tanggal</TableHead>
-                    <TableHead className="text-center">Status</TableHead>
-                    <TableHead className="text-center">Aksi</TableHead>
-                  </TableRow>
-                </TableHeader>
-
-                <TableBody>
-                  {data.items.map((report, idx) => (
-                    <TableRow key={report.id} className="hover:bg-muted/50">
-                      <TableCell className="text-center font-medium">
-                        {(data.current_page - 1) *
-                          (data.limit > 0 ? data.limit : 10) +
-                          (idx + 1)}{" "}
-                      </TableCell>
-                      <TableCell className="font-medium">
-                        {report.namaBarang}
-                      </TableCell>
-                      <TableCell className="max-w-[220px] truncate text-sm text-muted-foreground">
-                        {report.deskripsi}
-                      </TableCell>
-                      <TableCell className="text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-3 w-3" />
-                          <span className="truncate">
-                            {report.lokasiHilang}
-                          </span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-sm text-muted-foreground">
-                        {report.tanggal
-                          ? formatDate(report.tanggal)
-                          : report.createdAt
-                          ? formatDate(report.createdAt)
-                          : "-"}
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <Badge variant={getStatusBadge(report.status).variant}>
-                          {getStatusBadge(report.status).label}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-center">
-                        <Button
-                          size="icon"
-                          variant="outline"
-                          onClick={() => setSelectedReport(report)}
-                        >
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                      </TableCell>
+            <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
+              <div className="overflow-x-auto">
+                <Table className="table-fixed w-full">
+                  {/* ===== HEADER ===== */}
+                  <TableHeader>
+                    <TableRow className="bg-gray-50 border-b border-gray-200">
+                      <TableHead className="w-[60px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        No
+                      </TableHead>
+                      <TableHead className="w-[180px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Barang
+                      </TableHead>
+                      <TableHead className="w-[240px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Deskripsi
+                      </TableHead>
+                      <TableHead className="w-[200px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Lokasi
+                      </TableHead>
+                      <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Tanggal
+                      </TableHead>
+                      <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Status
+                      </TableHead>
+                      <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Aksi
+                      </TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+
+                  {/* ===== BODY ===== */}
+                  <TableBody className="divide-y divide-gray-200">
+                    {data.items.map((report, idx) => (
+                      <TableRow
+                        key={report.id}
+                        className="hover:bg-gray-50 transition-colors"
+                      >
+                        {/* No */}
+                        <TableCell className="px-4 py-4 text-center text-sm font-medium text-gray-900">
+                          {(data.current_page - 1) *
+                            (data.limit > 0 ? data.limit : 10) +
+                            (idx + 1)}
+                        </TableCell>
+
+                        {/* Barang */}
+                        <TableCell className="px-4 py-4 text-center">
+                          <p className="text-sm font-semibold text-gray-900 line-clamp-1">
+                            {report.namaBarang}
+                          </p>
+                        </TableCell>
+
+                        {/* Deskripsi */}
+                        <TableCell className="px-4 py-4 text-center">
+                          <p className="text-xs text-gray-600 line-clamp-2">
+                            {report.deskripsi}
+                          </p>
+                        </TableCell>
+
+                        {/* Lokasi */}
+                        <TableCell className="px-4 py-4 text-center">
+                          <div className="flex items-center justify-center gap-1.5">
+                            <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+                            <span className="text-xs text-gray-600 line-clamp-1">
+                              {report.lokasiHilang}
+                            </span>
+                          </div>
+                        </TableCell>
+
+                        {/* Tanggal */}
+                        <TableCell className="px-4 py-4 text-center">
+                          <p className="text-xs font-medium text-gray-600">
+                            {report.tanggal
+                              ? formatDate(report.tanggal)
+                              : report.createdAt
+                              ? formatDate(report.createdAt)
+                              : "-"}
+                          </p>
+                        </TableCell>
+
+                        {/* Status */}
+                        <TableCell className="px-4 py-4 text-center">
+                          <div className="flex justify-center">
+                            <Badge
+                              variant={getStatusBadge(report.status).variant}
+                            >
+                              {getStatusBadge(report.status).label}
+                            </Badge>
+                          </div>
+                        </TableCell>
+
+                        {/* Aksi */}
+                        <TableCell className="px-4 py-4 text-center">
+                          <Button
+                            size="icon"
+                            variant="outline"
+                            className="h-8 w-8"
+                            onClick={() => setSelectedReport(report)}
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             </div>
           ) : (
             <div className="flex flex-col items-center py-14 text-center">

@@ -148,20 +148,20 @@ export default function LostReportsTable() {
         <CardContent>
           <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <Table>
+              <Table className="table-fixed w-full">
                 {/* ===== TABLE HEADER ===== */}
                 <TableHeader>
                   <TableRow className="bg-gray-50 border-b border-gray-200">
                     <TableHead className="w-[60px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       No
                     </TableHead>
-                    <TableHead className="w-[160px] text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Barang
                     </TableHead>
-                    <TableHead className="w-[160px] text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Lokasi
                     </TableHead>
-                    <TableHead className="w-[160px] text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Pelapor
                     </TableHead>
                     <TableHead className="w-[140px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
@@ -189,30 +189,28 @@ export default function LostReportsTable() {
                       </TableCell>
 
                       {/* Barang */}
-                      <TableCell className="px-4 py-4">
-                        <p className="text-sm font-semibold text-gray-900 leading-tight">
+                      <TableCell className="px-4 py-4 text-center">
+                        <p className="text-sm font-semibold text-gray-900">
                           {r.namaBarang}
                         </p>
                       </TableCell>
 
                       {/* Lokasi */}
-                      <TableCell className="px-4 py-4">
-                        <div className="flex items-start gap-1.5">
-                          <MapPin className="h-3.5 w-3.5 text-gray-400 mt-0.5 shrink-0" />
-                          <span className="text-xs text-gray-600 leading-tight line-clamp-2">
+                      <TableCell className="px-4 py-4 text-center">
+                        <div className="flex items-center justify-center gap-1.5">
+                          <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+                          <span className="text-xs text-gray-600 line-clamp-1">
                             {r.lokasiHilang}
                           </span>
                         </div>
                       </TableCell>
 
                       {/* Pelapor */}
-                      <TableCell className="px-4 py-4">
-                        <p className="text-sm font-medium text-gray-900 leading-tight">
+                      <TableCell className="px-4 py-4 text-center">
+                        <p className="text-sm font-medium text-gray-900">
                           {r.user?.name}
                         </p>
-                        <p className="text-xs text-gray-500 mt-0.5">
-                          {r.user?.email}
-                        </p>
+                        <p className="text-xs text-gray-500">{r.user?.email}</p>
                       </TableCell>
 
                       {/* Tanggal */}
@@ -228,11 +226,13 @@ export default function LostReportsTable() {
 
                       {/* Status */}
                       <TableCell className="px-4 py-4 text-center">
-                        <LostReportsStatusBadge status={r.status} />
+                        <div className="flex justify-center">
+                          <LostReportsStatusBadge status={r.status} />
+                        </div>
                       </TableCell>
 
                       {/* Aksi */}
-                      <TableCell className="px-4 py-4">
+                      <TableCell className="px-4 py-4 text-center">
                         <div className="flex justify-center gap-1.5">
                           {r.status === "PENDING" && (
                             <>

@@ -140,13 +140,13 @@ export default function FoundReportAdminTable() {
                     <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Barang
                     </TableHead>
-                    <TableHead className="w-[220px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Deskripsi
                     </TableHead>
-                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Lokasi
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                       Pelapor
                     </TableHead>
                     <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">

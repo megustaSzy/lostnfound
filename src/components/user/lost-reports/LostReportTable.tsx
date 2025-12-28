@@ -178,8 +178,7 @@ export default function LostReportTable() {
             </div>
           )}
 
-          {/* Pagination */}
-          {data?.total_pages && data.total_pages > 1 && (
+          {data && (data?.total_pages ?? 0) > 1 && (
             <div className="mt-4 flex justify-center">
               <Pagination
                 currentPage={data.current_page}

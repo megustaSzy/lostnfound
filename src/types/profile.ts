@@ -3,6 +3,7 @@ export interface FormData {
   email: string;
   notelp?: string;
   password?: string;
+  image?: File | null;
 }
 
 export interface MessageType {

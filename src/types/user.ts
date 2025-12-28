@@ -4,6 +4,8 @@ export interface User {
   email: string;
   notelp?: string;
   role: "Admin" | "User";
+  imageUrl?: string;
+  imagePublicId?: string;
 }
 
 export interface UserResponse {

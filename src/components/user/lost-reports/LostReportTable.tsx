@@ -110,22 +110,22 @@ export default function LostReportTable() {
                       <TableHead className="w-[60px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         No
                       </TableHead>
-                      <TableHead className="w-[180px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Barang
                       </TableHead>
-                      <TableHead className="w-[240px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      <TableHead className="w-[180px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Deskripsi
                       </TableHead>
-                      <TableHead className="w-[200px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      <TableHead className="w-[140px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Lokasi
                       </TableHead>
-                      <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      <TableHead className="w-[140px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Tanggal
                       </TableHead>
-                      <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      <TableHead className="w-[80px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Status
                       </TableHead>
-                      <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      <TableHead className="w-[100px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Aksi
                       </TableHead>
                     </TableRow>

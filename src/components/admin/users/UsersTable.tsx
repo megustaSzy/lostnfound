@@ -64,16 +64,16 @@ export function UsersTable({
               <TableHead className="w-[60px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 No
               </TableHead>
-              <TableHead className="w-[200px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <TableHead className="w-[220px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Nama
               </TableHead>
               <TableHead className="w-[240px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Email
               </TableHead>
-              <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 No. Telp
               </TableHead>
-              <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <TableHead className="w-[80px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
                 Role
               </TableHead>
               <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">

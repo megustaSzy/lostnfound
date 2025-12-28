@@ -33,6 +33,13 @@ import { Pagination } from "../users/Pagination";
 import { api } from "@/lib/api";
 import { mutate as globalMutate } from "swr";
 
+const formatDate = (date: string) =>
+  new Date(date).toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+
 export default function LostReportsTable() {
   const [page, setPage] = useState(1);
   const limit = 10;
@@ -177,8 +184,12 @@ export default function LostReportsTable() {
                         {r.user?.email}
                       </p>
                     </TableCell>
-                    <TableCell>
-                      <p className="text-xs text-muted-foreground">{r.tanggal}</p>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {r.tanggal
+                        ? formatDate(r.tanggal)
+                        : r.createdAt
+                        ? formatDate(r.createdAt)
+                        : "-"}
                     </TableCell>
                     <TableCell className="text-center">
                       <LostReportsStatusBadge status={r.status} />

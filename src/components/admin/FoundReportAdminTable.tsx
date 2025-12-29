@@ -47,6 +47,7 @@ import {
   FoundReportsAdminPagination,
 } from "@/lib/fetchers/foundReportsAdminFetcher";
 import { DeleteFoundReportAdmin } from "@/components/admin/DeleteFoundReportAdmin";
+import { EditFoundReportAdmin } from "@/components/admin/EditFoundReportAdmin";
 import { useEffect } from "react";
 export default function FoundReportAdminTable() {
   const [page, setPage] = useState(1);
@@ -65,9 +66,11 @@ export default function FoundReportAdminTable() {
   );
 
   const [editOpen, setEditOpen] = useState(false);
-  const [deleteOpen, setDeleteOpen] = useState(false);
 
   const [editReport, setEditReport] = useState<FoundReportAdmin | null>(null);
+
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
   const [deleteReport, setDeleteReport] = useState<FoundReportAdmin | null>(
     null
   );
@@ -264,76 +267,22 @@ export default function FoundReportAdminTable() {
         </div>
       )}
 
-      {/* ================= EDIT DIALOG ================= */}
-      <Dialog open={editOpen} onOpenChange={setEditOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Edit Laporan</DialogTitle>
-          </DialogHeader>
-
-          {editReport && (
-            <form
-              className="space-y-4"
-              onSubmit={async (e) => {
-                e.preventDefault();
-
-                await fetch(`/api/found/${editReport.id}`, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    namaBarang: editReport.namaBarang,
-                    deskripsi: editReport.deskripsi,
-                    lokasiTemu: editReport.lokasiTemu,
-                  }),
-                });
-
-                mutate(swrKey);
-                setEditOpen(false);
-              }}
-            >
-              <Input
-                value={editReport.namaBarang}
-                onChange={(e) =>
-                  setEditReport({
-                    ...editReport,
-                    namaBarang: e.target.value,
-                  })
-                }
-              />
-
-              <Textarea
-                value={editReport.deskripsi}
-                onChange={(e) =>
-                  setEditReport({
-                    ...editReport,
-                    deskripsi: e.target.value,
-                  })
-                }
-              />
-
-              <Input
-                value={editReport.lokasiTemu}
-                onChange={(e) =>
-                  setEditReport({
-                    ...editReport,
-                    lokasiTemu: e.target.value,
-                  })
-                }
-              />
-
-              <DialogFooter>
-                <Button type="submit">Simpan</Button>
-              </DialogFooter>
-            </form>
-          )}
-        </DialogContent>
-      </Dialog>
+      <EditFoundReportAdmin
+        open={editOpen}
+        onOpenChange={(open) => {
+          setEditOpen(open);
+          if (!open) setEditReport(null);
+        }}
+        report={editReport}
+        swrKey={swrKey}
+      />
 
       <DeleteFoundReportAdmin
         open={deleteOpen}
-        onOpenChange={setDeleteOpen}
+        onOpenChange={(open) => {
+          setDeleteOpen(open);
+          if (!open) setDeleteReport(null);
+        }}
         report={deleteReport}
         swrKey={swrKey}
       />

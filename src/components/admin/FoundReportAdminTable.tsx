@@ -46,7 +46,9 @@ import {
   foundReportsAdminFetcher,
   FoundReportsAdminPagination,
 } from "@/lib/fetchers/foundReportsAdminFetcher";
-
+import { deleteFound } from "@/services/found";
+import { useToast } from "@/components/ui/use-toast";
+import { Toast } from "../ui/toast";
 export default function FoundReportAdminTable() {
   const [page, setPage] = useState(1);
   const limit = 10;
@@ -324,7 +326,6 @@ export default function FoundReportAdminTable() {
         </DialogContent>
       </Dialog>
 
-      {/* ================= DELETE DIALOG ================= */}
       <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <DialogContent>
           <DialogHeader>
@@ -339,15 +340,31 @@ export default function FoundReportAdminTable() {
             <Button variant="outline" onClick={() => setDeleteOpen(false)}>
               Batal
             </Button>
+
             <Button
               variant="destructive"
               onClick={async () => {
-                await fetch(`/api/found/${deleteReport?.id}`, {
-                  method: "DELETE",
-                });
+                if (!deleteReport) return;
 
-                mutate(swrKey);
-                setDeleteOpen(false);
+                try {
+                  await deleteFound(deleteReport.id);
+
+                  await mutate(swrKey);
+
+                  Toast({
+                    title: "Berhasil",
+                    description: "Laporan berhasil dihapus",
+                    variant: "success",
+                  });
+
+                  setDeleteOpen(false);
+                } catch (error) {
+                  Toast({
+                    title: "Gagal",
+                    description: "Gagal menghapus laporan",
+                    variant: "destructive",
+                  });
+                }
               }}
             >
               Hapus

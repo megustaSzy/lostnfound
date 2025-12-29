@@ -72,6 +72,7 @@ export default function FoundReportAdminTable() {
   const [deleteReport, setDeleteReport] = useState<FoundReportAdmin | null>(
     null
   );
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const isLoading = !data && !error;
 
@@ -343,31 +344,36 @@ export default function FoundReportAdminTable() {
 
             <Button
               variant="destructive"
+              disabled={isDeleting}
               onClick={async () => {
-                if (!deleteReport) return;
+                if (!deleteReport || isDeleting) return;
+
+                setIsDeleting(true);
 
                 try {
                   await deleteFound(deleteReport.id);
 
-                  await mutate(swrKey);
+                  await mutate(swrKey, undefined, { revalidate: true });
 
                   Toast({
                     title: "Berhasil",
                     description: "Laporan berhasil dihapus",
-                    variant: "success",
                   });
 
                   setDeleteOpen(false);
+                  setDeleteReport(null); 
                 } catch (error) {
                   Toast({
                     title: "Gagal",
                     description: "Gagal menghapus laporan",
                     variant: "destructive",
                   });
+                } finally {
+                  setIsDeleting(false);
                 }
               }}
             >
-              Hapus
+              {isDeleting ? "Menghapus..." : "Hapus"}
             </Button>
           </DialogFooter>
         </DialogContent>

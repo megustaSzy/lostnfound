@@ -270,7 +270,7 @@ export default function FoundReportAdminTable() {
               onSubmit={async (e) => {
                 e.preventDefault();
 
-                await fetch(`/api/found/foundreports/${editReport.id}`, {
+                await fetch(`/api/found/${editReport.id}`, {
                   method: "PATCH",
                   headers: {
                     "Content-Type": "application/json",
@@ -342,7 +342,7 @@ export default function FoundReportAdminTable() {
             <Button
               variant="destructive"
               onClick={async () => {
-                await fetch(`/api/found/foundreports/${deleteReport?.id}`, {
+                await fetch(`/api/found/${deleteReport?.id}`, {
                   method: "DELETE",
                 });
 

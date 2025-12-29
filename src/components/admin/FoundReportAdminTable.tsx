@@ -46,9 +46,8 @@ import {
   foundReportsAdminFetcher,
   FoundReportsAdminPagination,
 } from "@/lib/fetchers/foundReportsAdminFetcher";
-import { deleteFound } from "@/services/found";
-import { useToast } from "@/components/ui/use-toast";
-import { Toast } from "../ui/toast";
+import { DeleteFoundReportAdmin } from "@/components/admin/DeleteFoundReportAdmin";
+import { useEffect } from "react";
 export default function FoundReportAdminTable() {
   const [page, setPage] = useState(1);
   const limit = 10;
@@ -72,14 +71,19 @@ export default function FoundReportAdminTable() {
   const [deleteReport, setDeleteReport] = useState<FoundReportAdmin | null>(
     null
   );
-  const [isDeleting, setIsDeleting] = useState(false);
+  // const [isDeleting, setIsDeleting] = useState(false)
 
-  const isLoading = !data && !error;
+  const isLoading = !data && !error && page === 1;
 
   const reports = data?.items ?? [];
   const currentPage = data?.current_page ?? 1;
   const totalPages = data?.total_pages ?? 1;
   const rowLimit = data?.limit ?? limit;
+  useEffect(() => {
+    if (data && data.items.length === 0 && page > 1) {
+      setPage(1);
+    }
+  }, [data, page]);
 
   const getStatusBadge = (status?: string) => {
     const variants = {
@@ -327,57 +331,12 @@ export default function FoundReportAdminTable() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Hapus Laporan?</DialogTitle>
-          </DialogHeader>
-
-          <p className="text-sm text-muted-foreground">
-            Data ini akan dihapus permanen.
-          </p>
-
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteOpen(false)}>
-              Batal
-            </Button>
-
-            <Button
-              variant="destructive"
-              disabled={isDeleting}
-              onClick={async () => {
-                if (!deleteReport || isDeleting) return;
-
-                setIsDeleting(true);
-
-                try {
-                  await deleteFound(deleteReport.id);
-
-                  await mutate(swrKey, undefined, { revalidate: true });
-
-                  Toast({
-                    title: "Berhasil",
-                    description: "Laporan berhasil dihapus",
-                  });
-
-                  setDeleteOpen(false);
-                  setDeleteReport(null); 
-                } catch (error) {
-                  Toast({
-                    title: "Gagal",
-                    description: "Gagal menghapus laporan",
-                    variant: "destructive",
-                  });
-                } finally {
-                  setIsDeleting(false);
-                }
-              }}
-            >
-              {isDeleting ? "Menghapus..." : "Hapus"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <DeleteFoundReportAdmin
+        open={deleteOpen}
+        onOpenChange={setDeleteOpen}
+        report={deleteReport}
+        swrKey={swrKey}
+      />
 
       {/* ================= DETAIL ================= */}
       <Dialog

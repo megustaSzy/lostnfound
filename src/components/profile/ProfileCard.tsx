@@ -20,7 +20,7 @@ export function ProfileCard({ user, onAvatarChange }: Props) {
   return (
     <div className="shadow-md bg-white rounded-xl">
       <div className="p-6 flex flex-col items-center space-y-4">
-        {/* Avatar clickable */}
+        {/* Avatar */}
         <label className="relative cursor-pointer group">
           <Avatar className="h-32 w-32 border-2 border-gray-300">
             {user.imageUrl ? (
@@ -32,7 +32,7 @@ export function ProfileCard({ user, onAvatarChange }: Props) {
             )}
           </Avatar>
 
-          {/* overlay */}
+          {/* Overlay */}
           <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
             <Camera className="h-6 w-6 text-white" />
           </div>
@@ -45,32 +45,35 @@ export function ProfileCard({ user, onAvatarChange }: Props) {
           />
         </label>
 
-        {/* Info */}
-        <div className="text-center space-y-2 w-full">
-          <h2 className="text-xl font-bold text-black">{user.name}</h2>
-          <p className="text-sm text-black/70">{user.email}</p>
+        {/* Nama */}
+        <h2 className="text-xl font-bold text-black text-center">
+          {user.name}
+        </h2>
 
-          <div className="flex justify-center gap-2">
-            <Badge variant="outline" className="bg-green-100 border-green-300">
-              <CheckCircle className="h-3 w-3 mr-1 text-green-600" />
-              Active
-            </Badge>
+        {/* Email */}
+        <p className="text-sm text-black/70 text-center">{user.email}</p>
 
-            <Badge variant="outline" className="bg-gray-100 border-gray-300">
-              2025
-            </Badge>
-          </div>
+        {/* Status Active */}
+        <Badge variant="outline" className="bg-green-100 border-green-300">
+          <CheckCircle className="h-3 w-3 mr-1 text-green-600" />
+          Active
+        </Badge>
 
-          <Badge
-            variant="outline"
-            className="border-gray-300 bg-gray-100 text-black font-medium"
-          >
-            <Shield className="h-3 w-3 mr-1" strokeWidth={1.5} />
-            {user.role}
-          </Badge>
-        </div>
+        {/* Tahun */}
+        <Badge variant="outline" className="bg-gray-100 border-gray-300">
+          2025
+        </Badge>
 
-        <Separator className="bg-gray-300" />
+        {/* Role */}
+        <Badge
+          variant="outline"
+          className="border-gray-300 bg-gray-100 text-black font-medium"
+        >
+          <Shield className="h-3 w-3 mr-1" strokeWidth={1.5} />
+          {user.role}
+        </Badge>
+
+        <Separator className="bg-gray-300 w-full" />
       </div>
     </div>
   );

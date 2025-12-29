@@ -20,6 +20,7 @@ interface UsersTableProps {
   limit: number;
   isLoading: boolean;
   error?: any;
+  swrKey: string;
 }
 
 export function UsersTable({
@@ -28,8 +29,8 @@ export function UsersTable({
   limit,
   isLoading,
   error,
+  swrKey,
 }: UsersTableProps) {
-  // 🔥 Sanitization biar 0 gak muncul lagi
   const safePage = currentPage > 0 ? currentPage : 1;
   const safeLimit = limit > 0 ? limit : 10;
 
@@ -132,7 +133,7 @@ export function UsersTable({
                   {/* Aksi */}
                   <TableCell className="px-4 py-4 text-center">
                     <div className="flex justify-center">
-                      <UserActions user={u} />
+                      <UserActions user={u} swrKey={swrKey} />
                     </div>
                   </TableCell>
                 </TableRow>

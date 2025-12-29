@@ -8,7 +8,12 @@ import { User } from "@/types/user";
 import { EditUserDialog } from "@/components/admin/users/EditUserDialog";
 import { DeleteUserDialog } from "@/components/admin/users/DeleteUserDialog";
 
-export function UserActions({ user }: { user: User }) {
+interface Props {
+  user: User;
+  swrKey: string;
+}
+
+export function UserActions({ user, swrKey }: Props) {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
 
@@ -35,6 +40,7 @@ export function UserActions({ user }: { user: User }) {
         onOpenChange={setDeleteOpen}
         userId={user.id}
         userName={user.name}
+        swrKey={swrKey}
       />
     </>
   );

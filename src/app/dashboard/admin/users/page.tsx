@@ -19,13 +19,11 @@ export default function UsersPage() {
   const [page, setPage] = useState(1);
   const limit = 10;
 
-  const { data, error } = useSWR(
-    `/api/users?page=${page}&limit=${limit}`,
-    usersFetcher,
-    {
-      revalidateOnFocus: false,
-    }
-  );
+  const swrKey = `/api/users?page=${page}&limit=${limit}`;
+
+  const { data, error } = useSWR(swrKey, usersFetcher, {
+    revalidateOnFocus: false,
+  });
 
   if (userLoading) return <FullscreenLoader validating={false} />;
   if (!user) return <UnauthenticatedAlert />;
@@ -60,9 +58,10 @@ export default function UsersPage() {
             <UsersTable
               users={data?.items ?? []}
               currentPage={data?.current_page ?? 1}
-              limit={data?.limit && data.limit > 0 ? data.limit : 10} // jangan sampai 0
+              limit={data?.limit && data.limit > 0 ? data.limit : 10}
               isLoading={!data && !error}
               error={error}
+              swrKey={swrKey}
             />
 
             {data && data.total_pages > 1 ? (

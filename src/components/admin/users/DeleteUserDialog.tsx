@@ -21,6 +21,7 @@ interface Props {
   onOpenChange: (v: boolean) => void;
   userId: number;
   userName: string;
+  swrKey: string;
 }
 
 export function DeleteUserDialog({
@@ -28,6 +29,7 @@ export function DeleteUserDialog({
   onOpenChange,
   userId,
   userName,
+  swrKey,
 }: Props) {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -38,11 +40,26 @@ export function DeleteUserDialog({
   async function handleDelete() {
     if (!isMatch) return;
 
-    try {
-      setLoading(true);
+    setLoading(true);
 
+    try {
+      // ✅ 1. Optimistic update (langsung ilang dari tabel)
+      await mutate(
+        swrKey,
+        (current: any) => {
+          if (!current) return current;
+
+          return {
+            ...current,
+            items: current.items.filter((u: any) => u.id !== userId),
+            total: current.total - 1,
+          };
+        },
+        false // ⛔ jangan revalidate dulu
+      );
+
+      // ✅ 2. Call API
       await deleteUser(userId);
-      await mutate("/api/users");
 
       toast({
         title: "Berhasil",
@@ -53,6 +70,9 @@ export function DeleteUserDialog({
       setConfirmName("");
       onOpenChange(false);
     } catch (error) {
+      // 🔄 rollback kalau gagal
+      await mutate(swrKey);
+
       toast({
         title: "Gagal",
         description: "Gagal menghapus user",
@@ -81,15 +101,13 @@ export function DeleteUserDialog({
             </span>
           </p>
 
-          {/* KONFIRMASI KETIK NAMA */}
           <div className="space-y-2">
-            <Label htmlFor="confirm">
+            <Label>
               Ketik{" "}
               <span className="font-semibold text-foreground">{userName}</span>{" "}
               untuk mengonfirmasi
             </Label>
             <Input
-              id="confirm"
               value={confirmName}
               onChange={(e) => setConfirmName(e.target.value)}
               placeholder={`Ketik "${userName}"`}

@@ -177,13 +177,7 @@ export function ForgotPasswordForm() {
             </Button>
 
             <Link href="/login">
-              <Button
-                className="
-    w-full
-    bg-blue-600 hover:bg-blue-700
-    text-white font-medium
-  "
-              >
+              <Button className="w-full bg-white border border-slate-300 text-slate-700 hover:bg-slate-50">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Kembali ke Login
               </Button>

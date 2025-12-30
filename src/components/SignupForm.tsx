@@ -62,10 +62,14 @@ export function SignupForm(props: React.ComponentProps<typeof Card>) {
 
   return (
     <div className="w-full max-w-md">
-      <Card className="border-neutral-200 shadow-sm" {...props}>
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Buat Akun Baru</CardTitle>
-          <CardDescription>Masukkan data diri Anda</CardDescription>
+      <Card className="border border-slate-200 shadow-md" {...props}>
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-2xl font-bold text-slate-900">
+            Buat Akun Baru
+          </CardTitle>
+          <CardDescription className="text-slate-600">
+            Masukkan data diri Anda
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -75,7 +79,7 @@ export function SignupForm(props: React.ComponentProps<typeof Card>) {
               <Field>
                 <FieldLabel htmlFor="name">Nama Lengkap</FieldLabel>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                   <Input
                     id="name"
                     placeholder="John Doe"
@@ -157,7 +161,11 @@ export function SignupForm(props: React.ComponentProps<typeof Card>) {
             </FieldGroup>
 
             {/* BUTTON SUBMIT */}
-            <Button type="submit" disabled={isSubmitting} className="w-full">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-blue-600 hover:bg-blue-70 text-white font-medium"
+            >
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -174,14 +182,17 @@ export function SignupForm(props: React.ComponentProps<typeof Card>) {
                 <div className="w-full border-t border-neutral-200"></div>
               </div>
               <div className="relative flex justify-center text-xs">
-                <span className="bg-white px-2 text-neutral-500">atau</span>
+                <span className="bg-white px-2 text-slate-500">atau</span>
               </div>
             </div>
 
             {/* LINK KE LOGIN */}
             <div className="text-center text-sm text-neutral-600">
               Sudah punya akun?{" "}
-              <Link href="/login" className="text-blue-600 hover:underline">
+              <Link
+                href="/login"
+                className="text-blue-600 hover:text-blue-700 hover:underline"
+              >
                 Sign in
               </Link>
             </div>
@@ -192,10 +203,12 @@ export function SignupForm(props: React.ComponentProps<typeof Card>) {
       <p className="text-center text-xs text-neutral-600 mt-4">
         Dengan mendaftar, Anda menyetujui{" "}
         <Link href="/terms" className="text-blue-600 hover:underline">
+          {" "}
           Syarat & Ketentuan
         </Link>{" "}
         dan{" "}
         <Link href="/privacy" className="text-blue-600 hover:underline">
+          {" "}
           Kebijakan Privasi
         </Link>
       </p>

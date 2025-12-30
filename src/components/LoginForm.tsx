@@ -59,10 +59,14 @@ export function LoginForm() {
   );
 
   return (
-    <Card className="w-full max-w-md mx-auto shadow-lg">
-      <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl font-bold">Login</CardTitle>
-        <CardDescription>Masukkan email dan password Anda</CardDescription>
+    <Card className="w-full max-w-md mx-auto shadow-md border border-slate-200">
+      <CardHeader className="space-y-1 text-center">
+        <CardTitle className="text-2xl font-bold text-slate-900">
+          Login
+        </CardTitle>
+        <CardDescription className="text-slate-600">
+          Masukkan email dan password Anda
+        </CardDescription>
       </CardHeader>
 
       <CardContent>
@@ -119,9 +123,11 @@ export function LoginForm() {
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
                   disabled={loading}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 
-                   text-neutral-500 hover:text-neutral-700
-                   disabled:opacity-50"
+                  className="
+  absolute right-3 top-1/2 -translate-y-1/2
+  text-slate-500 hover:text-slate-700
+  disabled:opacity-50
+"
                   aria-label="Toggle password visibility"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -140,14 +146,22 @@ export function LoginForm() {
           <div className="flex justify-end -mt-2">
             <Link
               href="/forgot-password"
-              className="text-sm text-blue-600 hover:underline"
+              className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
             >
               Lupa password?
             </Link>
           </div>
 
           {/* LOGIN BUTTON */}
-          <Button type="submit" className="w-full mt-2" disabled={loading}>
+          <Button
+            type="submit"
+            disabled={loading}
+            className="
+    w-full mt-2
+    bg-blue-600 hover:bg-blue-700
+    text-white font-medium
+  "
+          >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading ? "Loading..." : "Login"}
           </Button>
@@ -157,7 +171,10 @@ export function LoginForm() {
 
           <div className="text-center text-sm text-neutral-600">
             Belum punya akun?{" "}
-            <Link href="/signup" className="text-blue-600 hover:underline">
+            <Link
+              href="/signup"
+              className="text-blue-600 hover:text-blue-700 hover:underline"
+            >
               Sign up
             </Link>
           </div>

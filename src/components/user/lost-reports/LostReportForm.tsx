@@ -23,12 +23,12 @@ export default function LostReportForm() {
     useLostReportForm();
 
   return (
-    <Card className="max-w-3xl mx-auto border-gray-200 shadow-sm">
+    <Card className="max-w-3xl mx-auto border shadow-sm">
       <CardHeader className="pb-4">
-        <CardTitle className="text-xl text-gray-900">
+        <CardTitle className="text-xl text-slate-900">
           Informasi Barang Hilang
         </CardTitle>
-        <CardDescription className="text-sm text-muted-foreground">
+        <CardDescription className="text-sm text-slate-600">
           Pastikan data diisi dengan benar
         </CardDescription>
       </CardHeader>
@@ -44,7 +44,7 @@ export default function LostReportForm() {
 
         {/* Success */}
         {successMsg && (
-          <Alert className="border-green-300 bg-green-50 text-green-800 text-sm">
+          <Alert className="border-emerald-300 bg-emerald-50 text-emerald-800 text-sm">
             <CheckCircle2 className="h-4 w-4" />
             <AlertDescription>{successMsg}</AlertDescription>
           </Alert>
@@ -54,11 +54,11 @@ export default function LostReportForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Nama Barang */}
           <div className="space-y-1.5">
-            <Label className="text-sm text-gray-700">
+            <Label className="text-sm text-slate-700">
               Nama Barang <span className="text-red-500">*</span>
             </Label>
             <Input
-              className="h-9 text-sm"
+              className="h-9 text-sm focus:border-blue-500 focus:ring-blue-500"
               value={form.namaBarang}
               onChange={(e) => updateField("namaBarang", e.target.value)}
               disabled={loading}
@@ -68,11 +68,11 @@ export default function LostReportForm() {
 
           {/* Lokasi Hilang */}
           <div className="space-y-1.5">
-            <Label className="text-sm text-gray-700">
+            <Label className="text-sm text-slate-700">
               Lokasi Hilang <span className="text-red-500">*</span>
             </Label>
             <Input
-              className="h-9 text-sm"
+              className="h-9 text-sm focus:border-blue-500 focus:ring-blue-500"
               value={form.lokasiHilang}
               onChange={(e) => updateField("lokasiHilang", e.target.value)}
               disabled={loading}
@@ -83,10 +83,10 @@ export default function LostReportForm() {
 
         {/* Deskripsi */}
         <div className="space-y-1.5">
-          <Label className="text-sm text-gray-700">Deskripsi</Label>
+          <Label className="text-sm text-slate-700">Deskripsi</Label>
           <Textarea
             rows={3}
-            className="resize-none text-sm"
+            className="resize-none text-sm focus:border-blue-500 focus:ring-blue-500"
             value={form.deskripsi}
             onChange={(e) => updateField("deskripsi", e.target.value)}
             disabled={loading}
@@ -96,12 +96,12 @@ export default function LostReportForm() {
 
         {/* Tanggal */}
         <div className="space-y-1.5">
-          <Label className="text-sm text-gray-700">
+          <Label className="text-sm text-slate-700">
             Tanggal Hilang <span className="text-red-500">*</span>
           </Label>
           <Input
             type="date"
-            className="h-9 text-sm"
+            className="h-9 text-sm focus:border-blue-500 focus:ring-blue-500"
             value={form.tanggal || ""}
             onChange={(e) => updateField("tanggal", e.target.value)}
             disabled={loading}
@@ -112,7 +112,7 @@ export default function LostReportForm() {
         <div className="flex justify-end gap-3 pt-4 border-t">
           <Button
             variant="outline"
-            className="h-9 px-6 text-sm"
+            className="h-9 px-6 text-sm border-blue-300 text-blue-600 hover:bg-blue-50"
             disabled={loading}
             onClick={() => router.back()}
           >
@@ -120,7 +120,7 @@ export default function LostReportForm() {
           </Button>
 
           <Button
-            className="h-9 px-6 text-sm gap-2"
+            className="h-9 px-6 text-sm gap-2 bg-blue-600 hover:bg-blue-700 text-white"
             disabled={
               loading ||
               !form.namaBarang.trim() ||

@@ -13,41 +13,44 @@ export function ProfileForm({
   saving,
 }: any) {
   return (
-    <div className="shadow-md bg-white rounded-xl">
+    <div className="shadow-sm bg-white rounded-xl border">
       <div className="p-6 space-y-6">
         <div className="space-y-6">
           {/* Name */}
           <div className="space-y-2">
-            <Label className="text-black font-medium text-sm flex items-center gap-2">
-              <User className="h-4 w-4" strokeWidth={1.5} /> Full Name
+            <Label className="text-slate-700 font-medium text-sm flex items-center gap-2">
+              <User className="h-4 w-4 text-blue-600" strokeWidth={1.5} /> Full
+              Name
             </Label>
             <Input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="bg-white border-gray-300 text-black"
+              className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
 
           {/* Email */}
           <div className="space-y-2">
-            <Label className="text-black font-medium text-sm flex items-center gap-2">
-              <Mail className="h-4 w-4" strokeWidth={1.5} /> Email Address
+            <Label className="text-slate-700 font-medium text-sm flex items-center gap-2">
+              <Mail className="h-4 w-4 text-blue-600" strokeWidth={1.5} /> Email
+              Address
             </Label>
             <Input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="bg-white border-gray-300 text-black"
+              className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
 
           {/* Phone */}
           <div className="space-y-2">
-            <Label className="text-black font-medium text-sm flex items-center gap-2">
-              <Phone className="h-4 w-4" strokeWidth={1.5} /> Phone Number
+            <Label className="text-slate-700 font-medium text-sm flex items-center gap-2">
+              <Phone className="h-4 w-4 text-blue-600" strokeWidth={1.5} />{" "}
+              Phone Number
             </Label>
             <Input
               type="text"
@@ -55,7 +58,7 @@ export function ProfileForm({
               value={formData.notelp}
               onChange={handleChange}
               placeholder="Optional"
-              className="bg-white border-gray-300 text-black"
+              className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
 
@@ -63,8 +66,9 @@ export function ProfileForm({
 
           {/* Password */}
           <div className="space-y-2">
-            <Label className="text-black font-medium text-sm flex items-center gap-2">
-              <Lock className="h-4 w-4" strokeWidth={1.5} /> New Password
+            <Label className="text-slate-700 font-medium text-sm flex items-center gap-2">
+              <Lock className="h-4 w-4 text-blue-600" strokeWidth={1.5} /> New
+              Password
             </Label>
             <Input
               type="password"
@@ -72,7 +76,7 @@ export function ProfileForm({
               value={formData.password}
               onChange={handleChange}
               placeholder="Leave empty to keep current password"
-              className="bg-white border-gray-300 text-black"
+              className="border-slate-300 focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
         </div>
@@ -81,7 +85,7 @@ export function ProfileForm({
           <Button
             onClick={handleSave}
             disabled={saving}
-            className="bg-black text-white hover:bg-gray-900"
+            className="bg-blue-600 hover:bg-blue-700 text-white"
           >
             {saving ? (
               <>

@@ -32,10 +32,14 @@ export default function CreateFoundReportAdmin() {
   });
 
   return (
-    <Card className="max-w-3xl mx-auto">
+    <Card className="max-w-3xl mx-auto border shadow-sm">
       <CardHeader>
-        <CardTitle>Informasi Barang Temuan</CardTitle>
-        <CardDescription>Lengkapi data barang yang ditemukan</CardDescription>
+        <CardTitle className="text-slate-900">
+          Informasi Barang Temuan
+        </CardTitle>
+        <CardDescription className="text-slate-600">
+          Lengkapi data barang yang ditemukan
+        </CardDescription>
       </CardHeader>
 
       <CardContent className="space-y-4">
@@ -49,7 +53,7 @@ export default function CreateFoundReportAdmin() {
 
         {/* SUCCESS */}
         {successMsg && (
-          <Alert className="border-green-300 bg-green-50 text-green-800">
+          <Alert className="border-emerald-300 bg-emerald-50 text-emerald-800">
             <CheckCircle2 className="h-4 w-4" />
             <AlertDescription>{successMsg}</AlertDescription>
           </Alert>
@@ -58,31 +62,33 @@ export default function CreateFoundReportAdmin() {
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1.5">
-            <Label>Nama Barang *</Label>
+            <Label className="text-slate-700">Nama Barang *</Label>
             <Input
               value={data.namaBarang}
               onChange={(e) => updateField("namaBarang", e.target.value)}
               disabled={loading}
               placeholder="Contoh: Dompet coklat"
+              className="focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
 
           <div className="space-y-1.5">
-            <Label>Lokasi Ditemukan *</Label>
+            <Label className="text-slate-700">Lokasi Ditemukan *</Label>
             <Input
               value={data.lokasiTemu}
               onChange={(e) => updateField("lokasiTemu", e.target.value)}
               disabled={loading}
               placeholder="Contoh: Musholla lantai 2"
+              className="focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
         </div>
 
         <div className="space-y-1.5">
-          <Label>Deskripsi</Label>
+          <Label className="text-slate-700">Deskripsi</Label>
           <Textarea
             rows={3}
-            className="resize-none"
+            className="resize-none focus:border-blue-500 focus:ring-blue-500"
             value={data.deskripsi}
             onChange={(e) => updateField("deskripsi", e.target.value)}
             disabled={loading}
@@ -90,17 +96,18 @@ export default function CreateFoundReportAdmin() {
         </div>
 
         <div className="space-y-1.5">
-          <Label>Tanggal Ditemukan *</Label>
+          <Label className="text-slate-700">Tanggal Ditemukan *</Label>
           <Input
             type="date"
             value={data.tanggal}
             onChange={(e) => updateField("tanggal", e.target.value)}
             disabled={loading}
+            className="focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
 
         <div className="space-y-1.5">
-          <Label>Foto Barang</Label>
+          <Label className="text-slate-700">Foto Barang</Label>
           <Input
             type="file"
             accept="image/*"
@@ -133,11 +140,13 @@ export default function CreateFoundReportAdmin() {
           )}
         </div>
 
+        {/* ACTION */}
         <div className="flex justify-end gap-3 pt-4">
           <Button
             variant="outline"
             disabled={loading}
             onClick={() => history.back()}
+            className="border-blue-300 text-blue-600 hover:bg-blue-50"
           >
             Batal
           </Button>
@@ -150,6 +159,7 @@ export default function CreateFoundReportAdmin() {
               !data.tanggal?.trim()
             }
             onClick={submit}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading ? "Menyimpan..." : "Simpan"}

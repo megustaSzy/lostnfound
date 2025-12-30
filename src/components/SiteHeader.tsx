@@ -19,7 +19,6 @@ export function SiteHeader() {
   const handleLogout = async () => {
     try {
       const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
       await fetch(`${BASE_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
@@ -32,30 +31,40 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
-      <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
-        <SidebarTrigger className="-ml-1" />
+    <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b border-slate-200 bg-white">
+      <div className="flex w-full items-center gap-2 px-4 lg:px-6">
+        <SidebarTrigger className="-ml-1 text-slate-600" />
+
         <Separator
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
 
-        <h1 className="text-base font-medium">Documents</h1>
+        {/* Title */}
+        <h1 className="text-sm font-semibold text-slate-800">Documents</h1>
 
+        {/* Right Menu */}
         <div className="ml-auto flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-8 w-8">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 text-slate-600 hover:bg-slate-100"
+              >
                 <Menu className="h-4 w-4" />
                 <span className="sr-only">Menu</span>
               </Button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent
+              align="end"
+              className="w-44 border border-slate-200"
+            >
               <DropdownMenuItem asChild>
                 <Link
                   href="/profile"
-                  className="flex cursor-pointer items-center"
+                  className="flex cursor-pointer items-center text-slate-700"
                 >
                   <User className="mr-2 h-4 w-4" />
                   Profile
@@ -64,7 +73,7 @@ export function SiteHeader() {
 
               <DropdownMenuItem
                 onClick={handleLogout}
-                className="flex cursor-pointer items-center text-red-600"
+                className="flex cursor-pointer items-center text-red-600 focus:bg-red-50"
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 Log Out

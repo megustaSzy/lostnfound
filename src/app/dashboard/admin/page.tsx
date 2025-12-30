@@ -10,14 +10,12 @@ import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
 
 import { adminDashboardFetcher } from "@/lib/fetchers/adminDashboardFetcher";
 
-// Komponen
 import { StatsCards } from "@/components/dashboard/admin/StatsCards";
 import { ReportsChart } from "@/components/dashboard/admin/ReportsCharts";
 import { SummaryCard } from "@/components/dashboard/admin/SummaryCard";
 
 export default function AdminDashboard() {
   const { user, loading: userLoading } = useUser();
-
   const { data, isLoading } = useSWR(
     "/api/dashboard/admin",
     adminDashboardFetcher
@@ -48,16 +46,21 @@ export default function AdminDashboard() {
       <SidebarInset>
         <SiteHeader />
 
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6 space-y-8">
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold text-black">Dashboard Admin</h1>
-            <p className="text-slate-600 text-lg">
-              Pantau dan kelola semua laporan dalam satu tempat
+        <div className="p-6 space-y-8 bg-slate-50 min-h-screen">
+          {/* Header */}
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+              Dashboard Admin
+            </h1>
+            <p className="text-muted-foreground">
+              Pantau dan kelola seluruh aktivitas sistem
             </p>
           </div>
 
+          {/* Stats */}
           <StatsCards lost={data.lost} found={data.found} user={data.user} />
 
+          {/* Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <ReportsChart
               lost={data.lost}

@@ -42,13 +42,13 @@ export default function LostReportCreatePage() {
         <SiteHeader />
 
         <div className="p-6 space-y-6">
-          {/* Local Header */}
+          {/* Header */}
           <div className="space-y-1">
-            <h1 className="text-3xl font-bold tracking-tight">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
               Buat Laporan Hilang
             </h1>
             <p className="text-sm text-muted-foreground">
-              Deskripsi singkat halaman kamu
+              Lengkapi informasi barang yang hilang untuk diproses admin
             </p>
           </div>
 

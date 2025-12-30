@@ -12,7 +12,15 @@ export const GoogleLoginButton = memo(function GoogleLoginButton() {
     <Button
       type="button"
       onClick={handleGoogleLogin}
-      className="w-full h-10 bg-white border border-neutral-300 text-neutral-900 font-bold flex items-center justify-center gap-2 hover:bg-white"
+      className="
+        w-full h-10
+        bg-white
+        border border-slate-300
+        text-slate-700
+        font-medium
+        flex items-center justify-center gap-2
+        hover:bg-slate-50
+      "
     >
       <svg className="w-5 h-5" viewBox="0 0 24 24">
         <path

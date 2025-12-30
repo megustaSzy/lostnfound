@@ -56,67 +56,62 @@ export function UsersTable({
   }
 
   return (
-    <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
+    <div className="rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
       <div className="overflow-x-auto">
         <Table className="table-fixed w-full">
-          {/* ===== HEADER ===== */}
+          {/* HEADER */}
           <TableHeader>
-            <TableRow className="bg-gray-50 border-b border-gray-200">
-              <TableHead className="w-[60px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+            <TableRow className="bg-muted/50 border-b">
+              <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
                 No
               </TableHead>
-              <TableHead className="w-[220px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <TableHead className="w-[220px] text-center text-xs font-semibold uppercase text-muted-foreground">
                 Nama
               </TableHead>
-              <TableHead className="w-[240px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <TableHead className="w-[240px] text-center text-xs font-semibold uppercase text-muted-foreground">
                 Email
               </TableHead>
-              <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
                 No. Telp
               </TableHead>
-              <TableHead className="w-[80px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <TableHead className="w-[80px] text-center text-xs font-semibold uppercase text-muted-foreground">
                 Role
               </TableHead>
-              <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
+              <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
                 Aksi
               </TableHead>
             </TableRow>
           </TableHeader>
 
-          {/* ===== BODY ===== */}
-          <TableBody className="divide-y divide-gray-200">
+          {/* BODY */}
+          <TableBody className="divide-y">
             {users && users.length > 0 ? (
               users.map((u, idx) => (
                 <TableRow
                   key={u.id}
-                  className="hover:bg-gray-50 transition-colors"
+                  className="hover:bg-muted/40 transition-colors"
                 >
-                  {/* No */}
-                  <TableCell className="px-4 py-4 text-center text-sm font-medium text-gray-900">
+                  <TableCell className="text-center text-sm font-medium">
                     {(safePage - 1) * safeLimit + (idx + 1)}
                   </TableCell>
 
-                  {/* Nama */}
-                  <TableCell className="px-4 py-4 text-center">
-                    <p className="text-sm font-medium text-gray-900 line-clamp-1">
-                      {u.name}
-                    </p>
+                  <TableCell className="text-center">
+                    <p className="text-sm font-medium line-clamp-1">{u.name}</p>
                   </TableCell>
 
-                  {/* Email */}
-                  <TableCell className="px-4 py-4 text-center">
-                    <p className="text-xs text-gray-600 line-clamp-1">
+                  <TableCell className="text-center">
+                    <p className="text-xs text-muted-foreground line-clamp-1">
                       {u.email}
                     </p>
                   </TableCell>
 
-                  {/* No Telp */}
-                  <TableCell className="px-4 py-4 text-center">
-                    <p className="text-xs text-gray-600">{u.notelp || "-"}</p>
+                  <TableCell className="text-center">
+                    <p className="text-xs text-muted-foreground">
+                      {u.notelp || "-"}
+                    </p>
                   </TableCell>
 
-                  {/* Role */}
-                  <TableCell className="px-4 py-4 text-center">
+                  <TableCell className="text-center">
                     <div className="flex justify-center">
                       <Badge
                         variant={
@@ -130,8 +125,7 @@ export function UsersTable({
                     </div>
                   </TableCell>
 
-                  {/* Aksi */}
-                  <TableCell className="px-4 py-4 text-center">
+                  <TableCell className="text-center">
                     <div className="flex justify-center">
                       <UserActions user={u} swrKey={swrKey} />
                     </div>
@@ -142,7 +136,7 @@ export function UsersTable({
               <TableRow>
                 <TableCell
                   colSpan={6}
-                  className="h-32 text-center text-sm text-gray-500"
+                  className="h-32 text-center text-sm text-muted-foreground"
                 >
                   Tidak ada data user
                 </TableCell>

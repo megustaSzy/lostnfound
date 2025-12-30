@@ -47,10 +47,10 @@ export default function FoundReportsAdminPage() {
 
         <div className="p-6 space-y-6">
           <div className="space-y-1">
-            <h1 className="text-3xl font-bold tracking-tight">
+            <h1 className="text-3xl font-bold tracking-tight text-slate-800">
               Laporan Ditemukan
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-slate-500">
               Kelola dan tinjau semua laporan barang yang ditemukan
             </p>
           </div>

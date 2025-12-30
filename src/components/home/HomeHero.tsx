@@ -5,7 +5,7 @@ export function HomeHero() {
   return (
     <section className="mx-auto max-w-4xl px-4 text-center space-y-6 sm:space-y-8">
       {/* Title */}
-      <h2 className="font-bold text-3xl sm:text-4xl md:text-5xl text-gray-900 leading-tight">
+      <h2 className="font-bold text-3xl sm:text-4xl md:text-5xl text-slate-900">
         Website Penemuan dan
         <br className="hidden sm:block" />
         Pelaporan Barang Hilang

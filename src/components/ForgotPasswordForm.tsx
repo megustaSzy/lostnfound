@@ -60,23 +60,23 @@ export function ForgotPasswordForm() {
   if (isSuccess) {
     return (
       <div className="w-full max-w-md mx-auto">
-        <Card className="border-neutral-200 shadow-lg">
+        <Card className="border border-slate-200 shadow-md">
           <CardHeader className="space-y-1 text-center pb-6">
             <div className="flex justify-center mb-4">
               <div className="rounded-full bg-green-100 p-4">
                 <CheckCircle2 className="h-10 w-10 text-green-600" />
               </div>
             </div>
-            <CardTitle className="text-2xl font-bold">
+            <CardTitle className="text-2xl font-bold text-slate-900">
               Email Terkirim!
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-slate-600">
               Kami telah mengirimkan link reset password ke email Anda
             </CardDescription>
           </CardHeader>
 
           <CardContent className="space-y-6">
-            <Alert className="border-blue-200 bg-blue-50">
+            <Alert className="border-blue-200 bg-blue-50 text-blue-800">
               <AlertDescription>
                 Periksa inbox email{" "}
                 <span className="font-semibold">{getValues("email")}</span> dan
@@ -85,12 +85,19 @@ export function ForgotPasswordForm() {
             </Alert>
 
             <div className="flex flex-col gap-3">
-              <Button variant="outline" onClick={() => setIsSuccess(false)}>
+              <Button
+                variant="outline"
+                className="border-slate-300 text-slate-700 hover:bg-slate-50"
+                onClick={() => setIsSuccess(false)}
+              >
                 Kirim Ulang Email
               </Button>
 
               <Link href="/login">
-                <Button className="w-full">
+                <Button
+                  variant="outline"
+                  className="w-full border-slate-300 text-slate-700 hover:bg-slate-50"
+                >
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Kembali ke Login
                 </Button>
@@ -107,8 +114,10 @@ export function ForgotPasswordForm() {
     <div className="w-full max-w-md mx-auto">
       <Card className="border-neutral-200 shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">Lupa Password?</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl font-bold text-slate-900">
+            Lupa Password?
+          </CardTitle>
+          <CardDescription className="text-slate-600">
             Masukkan email Anda untuk reset password
           </CardDescription>
         </CardHeader>
@@ -125,7 +134,7 @@ export function ForgotPasswordForm() {
               <Field>
                 <FieldLabel>Email</FieldLabel>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                   <Input
                     type="email"
                     placeholder="email@example.com"
@@ -148,7 +157,15 @@ export function ForgotPasswordForm() {
               </Field>
             </FieldGroup>
 
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="
+    w-full
+    bg-blue-600 hover:bg-blue-700
+    text-white font-medium
+  "
+            >
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -160,7 +177,13 @@ export function ForgotPasswordForm() {
             </Button>
 
             <Link href="/login">
-              <Button variant="outline" className="w-full">
+              <Button
+                className="
+    w-full
+    bg-blue-600 hover:bg-blue-700
+    text-white font-medium
+  "
+              >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Kembali ke Login
               </Button>

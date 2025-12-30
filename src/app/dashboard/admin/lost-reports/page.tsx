@@ -6,24 +6,21 @@ import LostReportsTable from "@/components/admin/lost-reports/LostReportsTable";
 import { AppSidebar } from "@/components/AppSidebar";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+
 import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
+import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 
 export default function LostReportsPage() {
   const { user, loading } = useUser();
 
-  // Loading user
-  if (loading) {
-    return <FullscreenLoader message="Memuat data user..." />;
+  // UNAUTH
+  if (!loading && !user) {
+    return <UnauthenticatedAlert />;
   }
 
-  if (!user) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-muted-foreground">
-          Tidak ada akses. Silakan login kembali.
-        </p>
-      </div>
-    );
+  // LOADING
+  if (loading) {
+    return <FullscreenLoader message="Memuat data user..." />;
   }
 
   return (
@@ -35,20 +32,14 @@ export default function LostReportsPage() {
         } as React.CSSProperties
       }
     >
-      {/* Sidebar */}
       <AppSidebar
-        role={user.role}
-        user={{
-          name: user.name,
-          email: user.email,
-        }}
+        role={user!.role}
+        user={{ name: user!.name, email: user!.email }}
       />
 
       <SidebarInset>
-        {/* Header */}
         <SiteHeader />
 
-        {/* MAIN CONTENT */}
         <div className="p-6 space-y-6">
           <div className="space-y-1">
             <h1 className="text-3xl font-bold tracking-tight">

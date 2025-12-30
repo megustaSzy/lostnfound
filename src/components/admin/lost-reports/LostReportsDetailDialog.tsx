@@ -32,56 +32,61 @@ export function LostReportsDetailDialog({
           <div className="space-y-6">
             {/* IMAGE */}
             {report.imageUrl && (
-              <img
-                src={report.imageUrl}
-                alt={report.namaBarang}
-                className="max-h-64 rounded-lg border mx-auto"
-              />
+              <div className="flex justify-center">
+                <img
+                  src={report.imageUrl}
+                  alt={report.namaBarang}
+                  className="max-h-64 rounded-lg border object-contain"
+                />
+              </div>
             )}
 
-            {/* INFO */}
-            <div className="grid gap-4">
-              <div>
-                <label className="text-sm text-muted-foreground">
-                  Nama Barang
-                </label>
+            {/* INFO GRID */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">Nama Barang</p>
                 <p className="font-semibold">{report.namaBarang}</p>
               </div>
 
-              <div>
-                <label className="text-sm text-muted-foreground">
-                  Deskripsi
-                </label>
-                <p className="text-sm">{report.deskripsi}</p>
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">Status</p>
+                <LostReportsStatusBadge status={report.status} />
               </div>
 
-              <div className="flex gap-2 items-center">
+              <div className="md:col-span-2 space-y-1">
+                <p className="text-sm text-muted-foreground">Deskripsi</p>
+                <p className="text-sm leading-relaxed">
+                  {report.deskripsi || "-"}
+                </p>
+              </div>
+
+              <div className="md:col-span-2 flex items-center gap-2 text-sm">
                 <MapPin className="h-4 w-4 text-muted-foreground" />
-                <p>{report.lokasiHilang}</p>
+                <span>{report.lokasiHilang}</span>
               </div>
+            </div>
 
-              <LostReportsStatusBadge status={report.status} />
+            {/* PELAPOR */}
+            <div className="pt-4 border-t space-y-3">
+              <p className="text-sm font-semibold">Data Pelapor</p>
 
-              <div className="pt-4 border-t">
-                <label className="text-sm text-muted-foreground">Pelapor</label>
-                <div className="mt-2 space-y-2">
-                  <div className="flex gap-2 items-center">
-                    <User className="h-4 w-4" />
-                    <span>{report.user.name}</span>
-                  </div>
-
-                  <div className="flex gap-2 items-center">
-                    <Mail className="h-4 w-4" />
-                    <span>{report.user.email}</span>
-                  </div>
-
-                  {report.user.notelp && (
-                    <div className="flex gap-2 items-center">
-                      <Phone className="h-4 w-4" />
-                      <span>{report.user.notelp}</span>
-                    </div>
-                  )}
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2">
+                  <User className="h-4 w-4 text-muted-foreground" />
+                  <span>{report.user.name}</span>
                 </div>
+
+                <div className="flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-muted-foreground" />
+                  <span>{report.user.email}</span>
+                </div>
+
+                {report.user.notelp && (
+                  <div className="flex items-center gap-2">
+                    <Phone className="h-4 w-4 text-muted-foreground" />
+                    <span>{report.user.notelp}</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>

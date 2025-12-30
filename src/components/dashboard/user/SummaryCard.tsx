@@ -10,9 +10,9 @@ export const SummaryCard = ({
     totalReports > 0 ? Math.round((foundReports / totalReports) * 100) : 0;
 
   return (
-    <Card className="border shadow-sm bg-white">
+    <Card className="border border-slate-200 shadow-sm bg-white">
       <CardHeader>
-        <CardTitle className="text-xl text-slate-800">Ringkasan Data</CardTitle>
+        <CardTitle className="text-lg text-slate-800">Ringkasan Data</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-4">
@@ -33,7 +33,7 @@ export const SummaryCard = ({
         />
 
         <p className="pt-3 text-xs text-muted-foreground border-t">
-          Dashboard diperbarui secara real-time
+          Data diperbarui secara real-time
         </p>
       </CardContent>
     </Card>
@@ -54,7 +54,7 @@ function SummaryItem({
   color: string;
 }) {
   return (
-    <div className="flex items-center justify-between rounded-lg border p-4">
+    <div className="flex items-center justify-between rounded-lg border border-slate-200 p-4">
       <div className="flex items-center gap-3">
         <div className={`p-2 rounded-lg ${bg} ${color}`}>
           <Icon className="h-5 w-5" />

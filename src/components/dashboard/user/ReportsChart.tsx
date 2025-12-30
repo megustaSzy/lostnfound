@@ -9,12 +9,11 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
-
 import { ReportsChartProps } from "@/types/card";
 
 export const ReportsChart = ({ chartData }: ReportsChartProps) => {
   return (
-    <Card className="border shadow-sm bg-white">
+    <Card className="border border-slate-200 shadow-sm bg-white">
       <CardHeader>
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-lg bg-blue-100 text-blue-600">
@@ -37,7 +36,6 @@ export const ReportsChart = ({ chartData }: ReportsChartProps) => {
                 borderRadius: 8,
                 border: "1px solid #e5e7eb",
               }}
-              cursor={{ fill: "rgba(59,130,246,0.1)" }}
             />
             <Bar dataKey="jumlah" radius={[6, 6, 0, 0]} fill="#3b82f6" />
           </BarChart>

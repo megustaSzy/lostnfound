@@ -92,16 +92,18 @@ export default function LostReportsTable() {
     }
   }
 
+  /* ================= ERROR ================= */
   if (error) {
     return (
       <Card>
         <CardContent>
-          <p className="text-destructive">Gagal memuat laporan.</p>
+          <p className="text-destructive text-sm">Gagal memuat laporan.</p>
         </CardContent>
       </Card>
     );
   }
 
+  /* ================= SKELETON ================= */
   if (showSkeleton) {
     return (
       <Card>
@@ -109,17 +111,16 @@ export default function LostReportsTable() {
           <Skeleton className="h-6 w-1/3" />
           <Skeleton className="h-4 w-1/2" />
         </CardHeader>
-        <CardContent>
-          <Skeleton className="h-10 w-full" />
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Skeleton key={i} className="h-14 w-full" />
+        <CardContent className="space-y-2">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <Skeleton key={i} className="h-12 w-full" />
           ))}
         </CardContent>
       </Card>
     );
   }
 
-  // Empty state tetap pakai Card
+  /* ================= EMPTY ================= */
   if (!data || data.items.length === 0) {
     return (
       <Card>
@@ -137,6 +138,7 @@ export default function LostReportsTable() {
     );
   }
 
+  /* ================= TABLE ================= */
   return (
     <>
       <Card>
@@ -146,100 +148,71 @@ export default function LostReportsTable() {
         </CardHeader>
 
         <CardContent>
-          <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
+          <div className="rounded-lg border overflow-hidden">
             <div className="overflow-x-auto">
-              <Table className="table-fixed w-full">
-                {/* ===== TABLE HEADER ===== */}
+              <Table>
                 <TableHeader>
-                  <TableRow className="bg-gray-50 border-b border-gray-200">
-                    <TableHead className="w-[60px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      No
-                    </TableHead>
-                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      Barang
-                    </TableHead>
-                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      Lokasi
-                    </TableHead>
-                    <TableHead className="w-[160px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      Pelapor
-                    </TableHead>
-                    <TableHead className="w-[140px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      Tanggal
-                    </TableHead>
-                    <TableHead className="w-[120px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      Status
-                    </TableHead>
-                    <TableHead className="w-[140px] text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">
-                      Aksi
-                    </TableHead>
+                  <TableRow className="bg-muted/40">
+                    {[
+                      "No",
+                      "Barang",
+                      "Lokasi",
+                      "Pelapor",
+                      "Tanggal",
+                      "Status",
+                      "Aksi",
+                    ].map((h) => (
+                      <TableHead
+                        key={h}
+                        className="text-center text-xs font-semibold uppercase tracking-wide"
+                      >
+                        {h}
+                      </TableHead>
+                    ))}
                   </TableRow>
                 </TableHeader>
 
-                {/* ===== TABLE BODY ===== */}
-                <TableBody className="divide-y divide-gray-200">
+                <TableBody>
                   {data.items.map((r, i) => (
-                    <TableRow
-                      key={r.id}
-                      className="hover:bg-gray-50 transition-colors"
-                    >
-                      {/* No */}
-                      <TableCell className="px-4 py-4 text-center text-sm font-medium text-gray-900">
+                    <TableRow key={r.id} className="hover:bg-muted/50">
+                      <TableCell className="text-center font-medium">
                         {(data.current_page - 1) * data.limit + (i + 1)}
                       </TableCell>
 
-                      {/* Barang */}
-                      <TableCell className="px-4 py-4 text-center">
-                        <p className="text-sm font-semibold text-gray-900">
-                          {r.namaBarang}
-                        </p>
+                      <TableCell className="text-center font-semibold">
+                        {r.namaBarang}
                       </TableCell>
 
-                      {/* Lokasi */}
-                      <TableCell className="px-4 py-4 text-center">
-                        <div className="flex items-center justify-center gap-1.5">
-                          <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0" />
-                          <span className="text-xs text-gray-600 line-clamp-1">
-                            {r.lokasiHilang}
-                          </span>
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+                          <MapPin className="h-3.5 w-3.5" />
+                          <span className="line-clamp-1">{r.lokasiHilang}</span>
                         </div>
                       </TableCell>
 
-                      {/* Pelapor */}
-                      <TableCell className="px-4 py-4 text-center">
-                        <p className="text-sm font-medium text-gray-900">
-                          {r.user?.name}
-                        </p>
-                        <p className="text-xs text-gray-500">{r.user?.email}</p>
-                      </TableCell>
-
-                      {/* Tanggal */}
-                      <TableCell className="px-4 py-4 text-center">
-                        <p className="text-xs font-medium text-gray-600">
-                          {r.tanggal
-                            ? formatDate(r.tanggal)
-                            : r.createdAt
-                            ? formatDate(r.createdAt)
-                            : "-"}
+                      <TableCell className="text-center">
+                        <p className="text-sm font-medium">{r.user?.name}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {r.user?.email}
                         </p>
                       </TableCell>
 
-                      {/* Status */}
-                      <TableCell className="px-4 py-4 text-center">
-                        <div className="flex justify-center">
-                          <LostReportsStatusBadge status={r.status} />
-                        </div>
+                      <TableCell className="text-center text-xs">
+                        {formatDate(r.tanggal ?? r.createdAt)}
                       </TableCell>
 
-                      {/* Aksi */}
-                      <TableCell className="px-4 py-4 text-center">
+                      <TableCell className="text-center">
+                        <LostReportsStatusBadge status={r.status} />
+                      </TableCell>
+
+                      <TableCell className="text-center">
                         <div className="flex justify-center gap-1.5">
                           {r.status === "PENDING" && (
                             <>
                               <Button
                                 size="icon"
                                 variant="outline"
-                                className="h-8 w-8 hover:bg-green-50 hover:border-green-300"
+                                className="h-8 w-8 hover:border-green-400"
                                 disabled={loadingAction === r.id}
                                 onClick={() =>
                                   setConfirmAction({
@@ -249,7 +222,7 @@ export default function LostReportsTable() {
                                 }
                               >
                                 {loadingAction === r.id ? (
-                                  <Loader2 className="h-4 w-4 animate-spin text-gray-600" />
+                                  <Loader2 className="h-4 w-4 animate-spin" />
                                 ) : (
                                   <Check className="h-4 w-4 text-green-600" />
                                 )}
@@ -258,7 +231,7 @@ export default function LostReportsTable() {
                               <Button
                                 size="icon"
                                 variant="outline"
-                                className="h-8 w-8 hover:bg-red-50 hover:border-red-300"
+                                className="h-8 w-8 hover:border-red-400"
                                 disabled={loadingAction === r.id}
                                 onClick={() =>
                                   setConfirmAction({
@@ -268,7 +241,7 @@ export default function LostReportsTable() {
                                 }
                               >
                                 {loadingAction === r.id ? (
-                                  <Loader2 className="h-4 w-4 animate-spin text-gray-600" />
+                                  <Loader2 className="h-4 w-4 animate-spin" />
                                 ) : (
                                   <X className="h-4 w-4 text-red-600" />
                                 )}
@@ -279,10 +252,10 @@ export default function LostReportsTable() {
                           <Button
                             size="icon"
                             variant="outline"
-                            className="h-8 w-8 hover:bg-blue-50 hover:border-blue-300"
+                            className="h-8 w-8"
                             onClick={() => setSelectedReport(r)}
                           >
-                            <Eye className="h-4 w-4 text-blue-600" />
+                            <Eye className="h-4 w-4" />
                           </Button>
                         </div>
                       </TableCell>
@@ -293,12 +266,11 @@ export default function LostReportsTable() {
             </div>
           </div>
 
-          {/* Pagination */}
           {data.total_pages > 1 && (
             <div className="mt-4 flex justify-center">
               <Pagination
-                currentPage={data.current_page ?? 1}
-                totalPages={data.total_pages ?? 1}
+                currentPage={data.current_page}
+                totalPages={data.total_pages}
                 onPageChange={setPage}
               />
             </div>

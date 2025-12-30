@@ -12,31 +12,20 @@ export const StatsCards = ({ statsData }: StatsCardsProps) => {
         return (
           <Card
             key={stat.title}
-            className={`relative overflow-hidden border shadow-sm
-              hover:shadow-md transition bg-gradient-to-br ${stat.bgGradient}`}
+            className="border border-slate-200 shadow-sm hover:shadow-md transition bg-white"
           >
-            <CardContent className="p-6 space-y-4">
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-sm font-medium text-slate-600">
-                    {stat.title}
-                  </p>
-                  <p className="text-3xl font-bold text-slate-900">
-                    {stat.value}
-                  </p>
-                </div>
-
-                <div
-                  className={`p-3 rounded-xl bg-white shadow ${stat.iconColor}`}
-                >
-                  <Icon className="h-6 w-6" />
-                </div>
+            <CardContent className="p-6 flex items-center justify-between">
+              <div>
+                <p className="text-sm text-muted-foreground">{stat.title}</p>
+                <p className="text-3xl font-bold text-slate-900">
+                  {stat.value}
+                </p>
               </div>
 
-              <div className="h-1.5 rounded-full bg-white/60 overflow-hidden">
-                <div
-                  className={`h-full w-1/2 rounded-full bg-gradient-to-r ${stat.gradient}`}
-                />
+              <div
+                className={`p-3 rounded-xl ${stat.bgGradient} ${stat.iconColor}`}
+              >
+                <Icon className="h-6 w-6" />
               </div>
             </CardContent>
           </Card>

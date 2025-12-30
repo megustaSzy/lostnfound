@@ -9,7 +9,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
 
 import { FileSearch, CheckCircle2 } from "lucide-react";
-
 import { userDashboardFetcher } from "@/lib/fetchers/userDashboardFetcher";
 
 import { StatsCards } from "@/components/dashboard/user/StatsCards";
@@ -24,9 +23,7 @@ export default function UserDashboard() {
     userDashboardFetcher
   );
 
-  const isDashboardLoading = userLoading || !user || !data;
-
-  if (isDashboardLoading) {
+  if (userLoading || !user || !data) {
     return <FullscreenLoader message="Memuat dashboard user..." />;
   }
 
@@ -35,17 +32,19 @@ export default function UserDashboard() {
       title: "Laporan Hilang Saya",
       value: data.myLost,
       icon: FileSearch,
-      gradient: "from-orange-500 to-red-500",
-      bgGradient: "from-orange-50 to-red-50",
+      iconBg: "bg-orange-100",
       iconColor: "text-orange-600",
+      gradient: "from-orange-400 to-orange-600",
+      bgGradient: "bg-gradient-to-br from-orange-50 to-orange-100",
     },
     {
       title: "Laporan Ditemukan",
       value: data.found,
       icon: CheckCircle2,
-      gradient: "from-emerald-500 to-teal-500",
-      bgGradient: "from-emerald-50 to-teal-50",
+      iconBg: "bg-emerald-100",
       iconColor: "text-emerald-600",
+      gradient: "from-emerald-400 to-emerald-600",
+      bgGradient: "bg-gradient-to-br from-emerald-50 to-emerald-100",
     },
   ];
 
@@ -53,8 +52,6 @@ export default function UserDashboard() {
     { name: "Hilang Saya", jumlah: data.myLost, fill: "#f97316" },
     { name: "Ditemukan", jumlah: data.found, fill: "#10b981" },
   ];
-
-  const totalReports = data.myLost + data.found;
 
   return (
     <SidebarProvider
@@ -73,11 +70,14 @@ export default function UserDashboard() {
       <SidebarInset>
         <SiteHeader />
 
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-6 space-y-8">
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold text-black">Dashboard User</h1>
-            <p className="text-slate-600 text-lg">
-              Pantau laporan hilang Anda dan statistik terkait
+        <div className="p-6 space-y-8 bg-slate-50 min-h-screen">
+          {/* Header */}
+          <div className="space-y-1">
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+              Dashboard Saya
+            </h1>
+            <p className="text-muted-foreground">
+              Pantau laporan hilang dan perkembangan penemuan barang
             </p>
           </div>
 
@@ -86,7 +86,7 @@ export default function UserDashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <ReportsChart chartData={chartData} />
             <SummaryCard
-              totalReports={totalReports}
+              totalReports={data.myLost + data.found}
               foundReports={data.found}
             />
           </div>

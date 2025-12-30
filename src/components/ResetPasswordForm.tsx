@@ -81,12 +81,14 @@ export default function ResetPasswordForm() {
   if (success) {
     return (
       <div className="w-full max-w-md mx-auto mt-10 text-center">
-        <Card className="border-neutral-200 shadow-lg p-6">
+        <Card className="border border-slate-200 shadow-md p-6 text-center">
           <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-green-600" />
-          <CardTitle className="text-xl font-bold mb-1">
+
+          <CardTitle className="text-xl font-bold text-slate-900 mb-1">
             Password Berhasil Diubah!
           </CardTitle>
-          <p className="text-sm text-neutral-600">
+
+          <p className="text-sm text-slate-600">
             Mengarahkan ke halaman login...
           </p>
         </Card>
@@ -102,10 +104,12 @@ export default function ResetPasswordForm() {
         </Alert>
       )}
 
-      <Card className="w-full max-w-md mx-auto shadow-lg">
+      <Card className="w-full max-w-md mx-auto border border-slate-200 shadow-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Reset Password</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-2xl font-bold text-slate-900">
+            Reset Password
+          </CardTitle>
+          <CardDescription className="text-slate-600">
             Masukkan password baru Anda untuk akun ini
           </CardDescription>
         </CardHeader>
@@ -129,8 +133,7 @@ export default function ResetPasswordForm() {
                   <button
                     type="button"
                     onClick={() => setShowPassword((prev) => !prev)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700"
-                    aria-label="Toggle password visibility"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -163,7 +166,7 @@ export default function ResetPasswordForm() {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword((prev) => !prev)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-700"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
                     aria-label="Toggle confirm password visibility"
                   >
                     {showConfirmPassword ? (
@@ -183,7 +186,11 @@ export default function ResetPasswordForm() {
             </FieldGroup>
 
             {/* BUTTON RESET PASSWORD */}
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium"
+            >
               {isSubmitting && (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               )}
@@ -194,7 +201,7 @@ export default function ResetPasswordForm() {
             <Button
               type="button"
               onClick={() => router.push("/forgot-password")}
-              className="w-full bg-white border border-neutral-300 text-neutral-900 hover:bg-neutral-50"
+              className="w-full bg-white border border-slate-300 text-slate-700 hover:bg-slate-50"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Kembali ke Lupa Password

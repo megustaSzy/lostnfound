@@ -19,15 +19,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import {
-  FileSearch,
-  MapPin,
-  Eye,
-  User,
-  Phone,
-  Pencil,
-  Trash2,
-} from "lucide-react";
+import { FileSearch, MapPin, Eye, Pencil, Trash2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -38,8 +30,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "../ui/skeleton";
 import { Pagination } from "@/components/admin/users/Pagination";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 
 import { FoundReportAdmin } from "@/types/foundReportAdmin";
 import {
@@ -89,17 +79,11 @@ export default function FoundReportAdminTable() {
   }, [data, page]);
 
   const getStatusBadge = (status?: string) => {
-    const variants = {
-      PENDING: { variant: "secondary" as const, label: "Pending" },
-      CLAIMED: { variant: "default" as const, label: "Ditemukan" },
-      APPROVED: { variant: "default" as const, label: "Disetujui" },
-    };
-    return (
-      variants[status as keyof typeof variants] || {
-        variant: "secondary",
-        label: status || "Unknown",
-      }
-    );
+    if (status === "CLAIMED") {
+      return { variant: "default" as const, label: "Ditemukan" };
+    }
+
+    return { variant: "secondary" as const, label: "Pending" };
   };
 
   const getNamaBarang = (r: FoundReportAdmin) =>
@@ -161,12 +145,12 @@ export default function FoundReportAdminTable() {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[60px] text-center">No</TableHead>
-                  <TableHead className="text-center">Barang</TableHead>
-                  <TableHead className="text-center">Deskripsi</TableHead>
-                  <TableHead className="text-center">Lokasi</TableHead>
+                  <TableHead>Barang</TableHead>
+                  <TableHead>Deskripsi</TableHead>
+                  <TableHead>Lokasi</TableHead>
                   <TableHead className="text-center">Pelapor</TableHead>
                   <TableHead className="text-center">Status</TableHead>
-                  <TableHead className="w-[140px] text-center">Aksi</TableHead>
+                  <TableHead className="text-center">Aksi</TableHead>
                 </TableRow>
               </TableHeader>
 
@@ -177,11 +161,11 @@ export default function FoundReportAdminTable() {
                       {(currentPage - 1) * rowLimit + (idx + 1)}
                     </TableCell>
 
-                    <TableCell className="text-center font-semibold">
+                    <TableCell className="font-medium">
                       {getNamaBarang(report)}
                     </TableCell>
 
-                    <TableCell className="text-center text-xs">
+                    <TableCell className="text-sm text-slate-600 max-w-[300px] truncate">
                       {getDeskripsi(report)}
                     </TableCell>
 
@@ -298,19 +282,26 @@ export default function FoundReportAdminTable() {
           </DialogHeader>
 
           {selectedReport && (
-            <div className="space-y-4">
-              <p>
-                <b>Barang:</b> {getNamaBarang(selectedReport)}
-              </p>
-              <p>
-                <b>Deskripsi:</b> {getDeskripsi(selectedReport)}
-              </p>
-              <p>
-                <b>Lokasi:</b> {getLokasi(selectedReport)}
-              </p>
-              <p>
-                <b>Pelapor:</b> {getPelapor(selectedReport)}
-              </p>
+            <div className="space-y-3 text-sm">
+              <div>
+                <p className="text-muted-foreground">Barang</p>
+                <p className="font-medium">{getNamaBarang(selectedReport)}</p>
+              </div>
+
+              <div>
+                <p className="text-muted-foreground">Deskripsi</p>
+                <p>{getDeskripsi(selectedReport)}</p>
+              </div>
+
+              <div>
+                <p className="text-muted-foreground">Lokasi</p>
+                <p>{getLokasi(selectedReport)}</p>
+              </div>
+
+              <div>
+                <p className="text-muted-foreground">Pelapor</p>
+                <p>{getPelapor(selectedReport)}</p>
+              </div>
             </div>
           )}
 

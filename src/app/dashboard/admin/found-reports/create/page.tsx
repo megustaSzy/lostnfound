@@ -6,20 +6,21 @@ import CreateFoundReportAdmin from "@/components/admin/CreateFoundReportAdmin";
 import { AppSidebar } from "@/components/AppSidebar";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+
 import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
+import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 
 export default function CreateFoundReportPage() {
   const { user, loading } = useUser();
 
-  if (loading) {
-    return <FullscreenLoader message="Memuat data user..." />;
+  // BELUM LOGIN
+  if (!loading && !user) {
+    return <UnauthenticatedAlert />;
   }
 
-  // Jika user tidak ada
-  if (!user) {
-    return (
-      <FullscreenLoader message="Tidak ada akses. Silakan login kembali." />
-    );
+  // LOADING USER
+  if (loading) {
+    return <FullscreenLoader message="Memuat data user..." />;
   }
 
   return (
@@ -32,16 +33,14 @@ export default function CreateFoundReportPage() {
       }
     >
       <AppSidebar
-        role={user.role}
-        user={{ name: user.name, email: user.email }}
+        role={user!.role}
+        user={{ name: user!.name, email: user!.email }}
       />
 
       <SidebarInset>
         <SiteHeader />
 
-        {/* MAIN CONTENT */}
         <div className="p-6 space-y-6">
-          {/* Header Page */}
           <div className="space-y-1">
             <h1 className="text-3xl font-bold tracking-tight">
               Buat Laporan Penemuan

@@ -27,16 +27,14 @@ function Feature({
   return (
     <div
       className="
-        bg-white rounded-xl p-6
-        border border-gray-200
-        shadow-sm
-        transition-all duration-300
-        hover:-translate-y-1 hover:shadow-xl
-      "
+  bg-white rounded-xl p-6
+  border border-slate-200
+  shadow-sm
+  hover:border-blue-300 hover:shadow-md
+  transition
+"
     >
-      <h3 className="mb-2 text-base sm:text-lg font-semibold text-gray-900">
-        {title}
-      </h3>
+      <h3 className="font-semibold text-slate-900">{title}</h3>
       <p className="text-sm sm:text-base text-gray-600">{description}</p>
     </div>
   );

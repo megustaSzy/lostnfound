@@ -40,12 +40,11 @@ export function DeleteFoundReportAdmin({
 
       mutate(
         swrKey,
-        (current: any) => {
+        (current?: { items: FoundReportAdmin[] }) => {
           if (!current) return current;
-
           return {
             ...current,
-            items: current.items.filter((r: any) => r.id !== report.id),
+            items: current.items.filter((r) => r.id !== report.id),
           };
         },
         false
@@ -58,7 +57,6 @@ export function DeleteFoundReportAdmin({
 
       onOpenChange(false);
 
-      // 🔁 revalidate background
       mutate(swrKey);
     } catch {
       toast({
@@ -72,14 +70,20 @@ export function DeleteFoundReportAdmin({
   }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(v) => {
+        if (!v) setIsDeleting(false);
+        onOpenChange(v);
+      }}
+    >
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Hapus Laporan?</DialogTitle>
         </DialogHeader>
 
         <p className="text-sm text-muted-foreground">
-          Data ini akan dihapus permanen.
+          Laporan ini akan dihapus secara permanen dan tidak dapat dikembalikan.
         </p>
 
         <DialogFooter>

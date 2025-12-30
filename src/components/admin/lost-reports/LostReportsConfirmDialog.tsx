@@ -25,12 +25,14 @@ export function LostReportsConfirmDialog({
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            {action?.status === "APPROVED" ? "Setujui laporan?" : "Tolak laporan?"}
+            {action?.status === "APPROVED"
+              ? "Setujui laporan?"
+              : "Tolak laporan?"}
           </AlertDialogTitle>
           <AlertDialogDescription>
             {action?.status === "APPROVED"
-              ? "Laporan akan disetujui."
-              : "Laporan akan ditolak."}
+              ? "Laporan akan disetujui dan diproses."
+              : "Laporan akan ditolak dan tidak dapat dikembalikan."}
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -38,7 +40,11 @@ export function LostReportsConfirmDialog({
           <AlertDialogCancel>Batal</AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
-            className={action?.status === "REJECTED" ? "bg-red-600 hover:bg-red-700" : ""}
+            className={
+              action?.status === "REJECTED"
+                ? "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                : ""
+            }
           >
             {action?.status === "APPROVED" ? "Setujui" : "Tolak"}
           </AlertDialogAction>

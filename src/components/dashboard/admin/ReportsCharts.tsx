@@ -15,20 +15,20 @@ import { Props } from "@/types/props";
 
 export function ReportsChart({ lost, found, user }: Props) {
   const data = [
-    { name: "Hilang", jumlah: lost, fill: "#f97316" },
-    { name: "Ditemukan", jumlah: found, fill: "#10b981" },
-    { name: "Users", jumlah: user, fill: "#3b82f6" },
+    { name: "Hilang", jumlah: lost, fill: "#fb923c" },
+    { name: "Ditemukan", jumlah: found, fill: "#34d399" },
+    { name: "Users", jumlah: user, fill: "#60a5fa" },
   ];
 
   return (
-    <Card className="border shadow-sm bg-white">
+    <Card className="border border-slate-200 shadow-sm bg-white">
       <CardHeader>
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-lg bg-blue-100 text-blue-600">
             <TrendingUp className="h-5 w-5" />
           </div>
           <CardTitle className="text-lg text-slate-800">
-            Statistik Laporan
+            Statistik Sistem
           </CardTitle>
         </div>
       </CardHeader>

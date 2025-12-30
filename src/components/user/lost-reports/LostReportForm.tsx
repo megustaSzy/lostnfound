@@ -23,15 +23,18 @@ export default function LostReportForm() {
     useLostReportForm();
 
   return (
-    <Card className="max-w-3xl mx-auto">
+    <Card className="max-w-3xl mx-auto border-gray-200 shadow-sm">
       <CardHeader className="pb-4">
-        <CardTitle className="text-xl">Informasi Barang Hilang</CardTitle>
-        <CardDescription className="text-sm">
-          Lengkapi data barang yang hilang
+        <CardTitle className="text-xl text-gray-900">
+          Informasi Barang Hilang
+        </CardTitle>
+        <CardDescription className="text-sm text-muted-foreground">
+          Pastikan data diisi dengan benar
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-5">
+        {/* Error */}
         {errorMsg && (
           <Alert variant="destructive" className="text-sm">
             <AlertCircle className="h-4 w-4" />
@@ -39,6 +42,7 @@ export default function LostReportForm() {
           </Alert>
         )}
 
+        {/* Success */}
         {successMsg && (
           <Alert className="border-green-300 bg-green-50 text-green-800 text-sm">
             <CheckCircle2 className="h-4 w-4" />
@@ -46,11 +50,13 @@ export default function LostReportForm() {
           </Alert>
         )}
 
-        {/* Grid Form */}
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Nama Barang */}
           <div className="space-y-1.5">
-            <Label className="text-sm">Nama Barang *</Label>
+            <Label className="text-sm text-gray-700">
+              Nama Barang <span className="text-red-500">*</span>
+            </Label>
             <Input
               className="h-9 text-sm"
               value={form.namaBarang}
@@ -62,7 +68,9 @@ export default function LostReportForm() {
 
           {/* Lokasi Hilang */}
           <div className="space-y-1.5">
-            <Label className="text-sm">Lokasi Hilang *</Label>
+            <Label className="text-sm text-gray-700">
+              Lokasi Hilang <span className="text-red-500">*</span>
+            </Label>
             <Input
               className="h-9 text-sm"
               value={form.lokasiHilang}
@@ -75,7 +83,7 @@ export default function LostReportForm() {
 
         {/* Deskripsi */}
         <div className="space-y-1.5">
-          <Label className="text-sm">Deskripsi</Label>
+          <Label className="text-sm text-gray-700">Deskripsi</Label>
           <Textarea
             rows={3}
             className="resize-none text-sm"
@@ -85,8 +93,12 @@ export default function LostReportForm() {
             placeholder="Detail tambahan barang..."
           />
         </div>
+
+        {/* Tanggal */}
         <div className="space-y-1.5">
-          <Label className="text-sm">Tanggal Hilang *</Label>
+          <Label className="text-sm text-gray-700">
+            Tanggal Hilang <span className="text-red-500">*</span>
+          </Label>
           <Input
             type="date"
             className="h-9 text-sm"
@@ -97,7 +109,7 @@ export default function LostReportForm() {
         </div>
 
         {/* Action */}
-        <div className="flex justify-end gap-3 pt-4">
+        <div className="flex justify-end gap-3 pt-4 border-t">
           <Button
             variant="outline"
             className="h-9 px-6 text-sm"

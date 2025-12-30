@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { FoundReportAdmin } from "@/types/foundReportAdmin";
 import { updateFound } from "@/services/found";
+import { useToast } from "@/components/ui/use-toast";
 
 interface Props {
   open: boolean;
@@ -28,6 +29,8 @@ export function EditFoundReportAdmin({
   report,
   swrKey,
 }: Props) {
+  const { toast } = useToast(); // ✅ PINDAH KE ATAS
+
   const [form, setForm] = useState({
     namaBarang: "",
     deskripsi: "",
@@ -50,19 +53,41 @@ export function EditFoundReportAdmin({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
 
     try {
       await updateFound(report.id, form);
+
+      toast({
+        title: "Berhasil",
+        description: "Laporan berhasil diperbarui",
+      });
+
       mutate(swrKey);
       onOpenChange(false);
+    } catch {
+      toast({
+        title: "Gagal",
+        description: "Gagal memperbarui laporan",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(v) => {
+        if (!v) {
+          setIsSubmitting(false);
+        }
+        onOpenChange(v);
+      }}
+    >
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Edit Laporan</DialogTitle>

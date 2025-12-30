@@ -33,36 +33,33 @@ export default function CreateFoundReportAdmin() {
 
   return (
     <Card className="max-w-3xl mx-auto">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-xl">Informasi Barang Temuan</CardTitle>
-        <CardDescription className="text-sm">
-          Lengkapi data barang yang ditemukan
-        </CardDescription>
+      <CardHeader>
+        <CardTitle>Informasi Barang Temuan</CardTitle>
+        <CardDescription>Lengkapi data barang yang ditemukan</CardDescription>
       </CardHeader>
 
       <CardContent className="space-y-4">
-        {/* ALERT ERROR */}
+        {/* ERROR */}
         {errorMsg && (
-          <Alert variant="destructive" className="text-sm">
+          <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{errorMsg}</AlertDescription>
           </Alert>
         )}
 
-        {/* ALERT SUCCESS */}
+        {/* SUCCESS */}
         {successMsg && (
-          <Alert className="border-green-300 bg-green-50 text-green-800 text-sm">
+          <Alert className="border-green-300 bg-green-50 text-green-800">
             <CheckCircle2 className="h-4 w-4" />
             <AlertDescription>{successMsg}</AlertDescription>
           </Alert>
         )}
 
-        {/* GRID: Nama Barang + Lokasi */}
+        {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1.5">
-            <Label className="text-sm">Nama Barang *</Label>
+            <Label>Nama Barang *</Label>
             <Input
-              className="h-9 text-sm"
               value={data.namaBarang}
               onChange={(e) => updateField("namaBarang", e.target.value)}
               disabled={loading}
@@ -71,9 +68,8 @@ export default function CreateFoundReportAdmin() {
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-sm">Lokasi Ditemukan *</Label>
+            <Label>Lokasi Ditemukan *</Label>
             <Input
-              className="h-9 text-sm"
               value={data.lokasiTemu}
               onChange={(e) => updateField("lokasiTemu", e.target.value)}
               disabled={loading}
@@ -82,66 +78,53 @@ export default function CreateFoundReportAdmin() {
           </div>
         </div>
 
-        {/* DESKRIPSI FULL WIDTH */}
         <div className="space-y-1.5">
-          <Label className="text-sm">Deskripsi</Label>
+          <Label>Deskripsi</Label>
           <Textarea
             rows={3}
-            className="resize-none text-sm"
+            className="resize-none"
             value={data.deskripsi}
             onChange={(e) => updateField("deskripsi", e.target.value)}
             disabled={loading}
-            placeholder="Detail tambahan barang..."
           />
         </div>
 
-        {/* TANGGAL */}
         <div className="space-y-1.5">
-          <Label className="text-sm">Tanggal Ditemukan *</Label>
+          <Label>Tanggal Ditemukan *</Label>
           <Input
             type="date"
-            className="h-9 text-sm"
             value={data.tanggal}
             onChange={(e) => updateField("tanggal", e.target.value)}
             disabled={loading}
           />
         </div>
 
-        {/* UPLOAD GAMBAR */}
         <div className="space-y-1.5">
-          <Label className="text-sm">Foto Barang</Label>
+          <Label>Foto Barang</Label>
           <Input
             type="file"
             accept="image/*"
-            className="h-9 text-sm"
             disabled={loading}
-            onChange={(e) => {
-              const file = e.target.files?.[0] || null;
-              handleImage(file);
-            }}
+            onChange={(e) => handleImage(e.target.files?.[0] || null)}
           />
 
-          {/* Garis pemisah */}
-          <hr className="border-gray-200 my-2" />
+          <hr className="border-border my-2" />
 
-          {/* Status nama file */}
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-muted-foreground">
             {previewUrl ? "File sudah dipilih" : "Tidak ada file yang dipilih"}
           </p>
 
-          {/* PREVIEW IMAGE */}
           {previewUrl && (
-            <div className="mt-2 relative w-40 space-y-2">
+            <div className="mt-2 space-y-2 w-40">
               <img
                 src={previewUrl}
                 alt="Preview"
-                className="w-40 h-40 object-cover rounded-md border"
+                className="w-40 h-40 rounded-md object-cover border"
               />
               <Button
                 type="button"
                 variant="destructive"
                 size="sm"
-                className="h-8 px-4 text-xs"
                 onClick={removeImage}
               >
                 Hapus Foto
@@ -150,11 +133,9 @@ export default function CreateFoundReportAdmin() {
           )}
         </div>
 
-        {/* ACTION BUTTONS */}
         <div className="flex justify-end gap-3 pt-4">
           <Button
             variant="outline"
-            className="h-9 px-6 text-sm"
             disabled={loading}
             onClick={() => history.back()}
           >
@@ -162,7 +143,6 @@ export default function CreateFoundReportAdmin() {
           </Button>
 
           <Button
-            className="h-9 px-6 text-sm gap-2"
             disabled={
               loading ||
               !data.namaBarang.trim() ||
@@ -171,7 +151,7 @@ export default function CreateFoundReportAdmin() {
             }
             onClick={submit}
           >
-            {loading && <Loader2 className="h-4 w-4 animate-spin" />}
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {loading ? "Menyimpan..." : "Simpan"}
           </Button>
         </div>

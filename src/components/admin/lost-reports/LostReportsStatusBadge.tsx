@@ -1,9 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 
-type BadgeVariant = React.ComponentProps<typeof Badge>["variant"];
 type StatusKey = "PENDING" | "APPROVED" | "REJECTED";
 
-const variants: Record<StatusKey, { variant: BadgeVariant; label: string }> = {
+const variants: Record<
+  StatusKey,
+  { variant: "default" | "secondary" | "destructive"; label: string }
+> = {
   PENDING: { variant: "secondary", label: "Pending" },
   APPROVED: { variant: "default", label: "Disetujui" },
   REJECTED: { variant: "destructive", label: "Ditolak" },

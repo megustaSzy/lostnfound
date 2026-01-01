@@ -41,7 +41,7 @@ export function SiteHeader() {
         />
 
         {/* Title */}
-        <h1 className="text-sm font-semibold text-slate-800">Documents</h1>
+        {/* <h1 className="text-sm font-semibold text-slate-800">Documents</h1> */}
 
         {/* Right Menu */}
         <div className="ml-auto flex items-center gap-2">

@@ -1,6 +1,6 @@
 "use client";
 
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 import { useState } from "react";
 import {
   Card,
@@ -19,15 +19,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { FileSearch, MapPin, Eye, Pencil, Trash2, Shield } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-  DialogDescription,
-} from "@/components/ui/dialog";
+import { FileSearch, MapPin, Eye, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "../ui/skeleton";
 import { Pagination } from "@/components/admin/users/Pagination";
@@ -40,6 +32,7 @@ import {
 import { DeleteFoundReportAdmin } from "@/components/admin/DeleteFoundReportAdmin";
 import { EditFoundReportAdmin } from "@/components/admin/EditFoundReportAdmin";
 import { useEffect } from "react";
+import { FoundReportAdminDialog } from "@/components/admin/FoundReportAdminDialog";
 export default function FoundReportAdminTable() {
   const [page, setPage] = useState(1);
   const limit = 10;
@@ -291,62 +284,15 @@ export default function FoundReportAdminTable() {
         swrKey={swrKey}
       />
 
-      {/* ================= DETAIL ================= */}
-      <Dialog
-        open={!!selectedReport}
-        onOpenChange={() => setSelectedReport(null)}
-      >
-        <DialogContent className="max-w-xl rounded-lg p-6">
-          <DialogHeader className="space-y-1">
-            <DialogTitle className="text-xl font-bold">
-              Detail Laporan
-            </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground">
-              Informasi lengkap laporan pengguna
-            </DialogDescription>
-          </DialogHeader>
-
-          {selectedReport && (
-            <div className="space-y-4 text-sm">
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Barang</p>
-                <p className="font-semibold">{getNamaBarang(selectedReport)}</p>
-              </div>
-
-              <div className="space-y-1">
-                <p className="text-sm text-muted-foreground">Deskripsi</p>
-                <p className="leading-relaxed">
-                  {getDeskripsi(selectedReport) || "-"}
-                </p>
-              </div>
-
-              <div className="space-y-1 flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-muted-foreground" />
-                <div>
-                  <p className="text-sm text-muted-foreground">Lokasi</p>
-                  <p className="font-medium">
-                    {getLokasi(selectedReport) || "-"}
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-3 border-t">
-                <p className="text-sm font-semibold mb-2">Pelapor (Admin)</p>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Shield className="h-4 w-4" />
-                  <p className="font-medium text-foreground">
-                    {getPelapor(selectedReport) || "-"}
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <DialogFooter className="pt-2">
-            <Button onClick={() => setSelectedReport(null)}>Tutup</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      {/* DIALOG */}
+      <FoundReportAdminDialog
+        selectedReport={selectedReport}
+        setSelectedReport={setSelectedReport}
+        getNamaBarang={getNamaBarang}
+        getDeskripsi={getDeskripsi}
+        getLokasi={getLokasi}
+        getPelapor={getPelapor}
+      />
     </Card>
   );
 }

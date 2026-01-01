@@ -27,15 +27,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
 import { FileSearch, MapPin, Eye } from "lucide-react";
 import { Pagination } from "@/components/admin/users/Pagination";
+import { FoundReportUserAdminDialog } from "@/components/dashboard/admin/FoundReportUserAdminDialog";
 
 export default function FoundReportUserAdminTable() {
   const [page, setPage] = useState(1);
@@ -215,46 +209,10 @@ export default function FoundReportUserAdminTable() {
       </CardContent>
 
       {/* Detail Dialog */}
-      <Dialog
-        open={!!selectedReport}
-        onOpenChange={() => setSelectedReport(null)}
-      >
-        <DialogContent className="max-w-xl">
-          <DialogHeader>
-            <DialogTitle>Detail Laporan</DialogTitle>
-          </DialogHeader>
-
-          {selectedReport && (
-            <div className="space-y-4 text-sm">
-              {selectedReport.imageUrl && (
-                <img
-                  src={selectedReport.imageUrl}
-                  alt={selectedReport.namaBarang}
-                  className="h-32 mx-auto object-contain rounded-md border"
-                />
-              )}
-              <div>
-                <p className="text-muted-foreground">Nama Barang</p>
-                <p className="font-medium">{selectedReport.namaBarang}</p>
-              </div>
-              <div>
-                <p className="text-muted-foreground">Deskripsi</p>
-                <p>{selectedReport.deskripsi || "-"}</p>
-              </div>
-              <div>
-                <p className="text-muted-foreground">Lokasi</p>
-                <p>{selectedReport.lokasiTemu}</p>
-              </div>
-            </div>
-          )}
-
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setSelectedReport(null)}>
-              Tutup
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <FoundReportUserAdminDialog
+        selectedReport={selectedReport}
+        setSelectedReport={setSelectedReport}
+      />
     </Card>
   );
 }

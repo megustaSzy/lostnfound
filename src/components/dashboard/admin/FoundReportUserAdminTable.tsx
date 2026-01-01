@@ -110,22 +110,22 @@ export default function FoundReportUserAdminTable() {
                     <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       No
                     </TableHead>
-                    <TableHead className="w-[180px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Barang
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[180px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Deskripsi
                     </TableHead>
                     <TableHead className="w-[140px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Lokasi
                     </TableHead>
-                    <TableHead className="w-[160px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[140px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Tanggal
                     </TableHead>
-                    <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[80px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Status
                     </TableHead>
-                    <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[100px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Detail
                     </TableHead>
                   </TableRow>

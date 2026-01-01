@@ -5,10 +5,12 @@ export function HomeHero() {
   return (
     <section className="mx-auto max-w-4xl px-4 text-center space-y-6 sm:space-y-8">
       {/* Title */}
-      <h2 className="font-bold text-3xl sm:text-4xl md:text-5xl text-slate-900">
+      <h2 className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-blue-700 dark:text-blue-400 text-center sm:text-left leading-tight">
         Website Penemuan dan
         <br className="hidden sm:block" />
-        <span className="text-blue-600"> Pelaporan Barang Hilang</span>
+        <span className="text-blue-500 dark:text-blue-300">
+          Pelaporan Barang Hilang
+        </span>
       </h2>
 
       {/* Description */}

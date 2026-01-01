@@ -5,13 +5,11 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin } from "lucide-react";
 import { AdminFoundReport } from "@/types/foundReports";
+import { MapPin } from "lucide-react";
 
 export function FoundReportUserAdminDialog({
   selectedReport,
@@ -20,78 +18,77 @@ export function FoundReportUserAdminDialog({
   selectedReport: AdminFoundReport | null;
   setSelectedReport: (r: AdminFoundReport | null) => void;
 }) {
-  if (!selectedReport) return null;
-
-  const status = {
+  const statusMap = {
     PENDING: { variant: "secondary" as const, label: "Pending" },
     CLAIMED: { variant: "default" as const, label: "Ditemukan" },
     APPROVED: { variant: "default" as const, label: "Disetujui" },
     REJECTED: { variant: "destructive" as const, label: "Ditolak" },
-  }[selectedReport.statusFound] ?? {
-    variant: "secondary",
-    label: "Unknown",
   };
 
   return (
-    <Dialog open onOpenChange={() => setSelectedReport(null)}>
-      <DialogContent className="max-w-xl rounded-lg p-6">
+    <Dialog
+      open={!!selectedReport}
+      onOpenChange={() => setSelectedReport(null)}
+    >
+      <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="text-xl font-bold">
-            Detail Laporan Penemuan
-          </DialogTitle>
+          <DialogTitle>Detail Laporan Penemuan</DialogTitle>
           <DialogDescription>
-            Informasi lengkap laporan yang ditampilkan di tabel
+            Informasi lengkap laporan pengguna
           </DialogDescription>
         </DialogHeader>
 
-        {/* CONTENT */}
-        <div className="space-y-5 text-sm">
-          {/* Image */}
-          {selectedReport.imageUrl && (
-            <img
-              src={selectedReport.imageUrl}
-              alt={selectedReport.namaBarang}
-              className="h-40 w-full object-contain rounded-md border"
-            />
-          )}
+        {selectedReport && (
+          <div className="space-y-6">
+            {/* IMAGE */}
+            {selectedReport.imageUrl && (
+              <div className="flex justify-center">
+                <img
+                  src={selectedReport.imageUrl}
+                  alt={selectedReport.namaBarang}
+                  className="max-h-64 rounded-lg border object-contain"
+                />
+              </div>
+            )}
 
-          {/* Nama Barang */}
-          <div>
-            <p className="text-muted-foreground text-xs mb-1">Nama Barang</p>
-            <p className="font-semibold text-base">
-              {selectedReport.namaBarang}
-            </p>
-          </div>
+            {/* INFO GRID */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Nama Barang */}
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">Nama Barang</p>
+                <p className="font-semibold">{selectedReport.namaBarang}</p>
+              </div>
 
-          {/* Deskripsi */}
-          <div>
-            <p className="text-muted-foreground text-xs mb-1">Deskripsi</p>
-            <p className="leading-relaxed">{selectedReport.deskripsi || "-"}</p>
-          </div>
+              {/* Status */}
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">Status</p>
+                <Badge
+                  variant={
+                    statusMap[selectedReport.statusFound]?.variant ??
+                    "secondary"
+                  }
+                >
+                  {statusMap[selectedReport.statusFound]?.label ??
+                    selectedReport.statusFound}
+                </Badge>
+              </div>
 
-          {/* Lokasi */}
-          <div className="flex items-start gap-2">
-            <MapPin className="h-4 w-4 mt-1 text-muted-foreground" />
-            <div>
-              <p className="text-muted-foreground text-xs mb-1">
-                Lokasi Temuan
-              </p>
-              <p className="font-medium">{selectedReport.lokasiTemu}</p>
+              {/* Deskripsi */}
+              <div className="md:col-span-2 space-y-1">
+                <p className="text-sm text-muted-foreground">Deskripsi</p>
+                <p className="text-sm leading-relaxed">
+                  {selectedReport.deskripsi || "-"}
+                </p>
+              </div>
+
+              {/* Lokasi */}
+              <div className="md:col-span-2 flex items-center gap-2 text-sm">
+                <MapPin className="h-4 w-4 text-muted-foreground" />
+                <span>{selectedReport.lokasiTemu}</span>
+              </div>
             </div>
           </div>
-
-          {/* Status */}
-          <div>
-            <p className="text-muted-foreground text-xs mb-1">Status</p>
-            <Badge variant={status.variant}>{status.label}</Badge>
-          </div>
-        </div>
-
-        <DialogFooter className="pt-4">
-          <Button variant="outline" onClick={() => setSelectedReport(null)}>
-            Tutup
-          </Button>
-        </DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );

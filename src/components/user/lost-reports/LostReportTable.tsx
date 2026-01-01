@@ -18,16 +18,8 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FileSearch, MapPin, Eye, PlusCircle, AlertCircle } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Pagination } from "@/components/admin/users/Pagination";
@@ -37,6 +29,7 @@ import {
   lostReportsMeFetcher,
   LostReportsPagination,
 } from "@/lib/fetchers/lostReportsMeFetcher";
+import { LostReportDialog } from "./LostReportDialog";
 
 const formatDate = (date: string) =>
   new Date(date).toLocaleDateString("id-ID", {
@@ -236,66 +229,10 @@ export default function LostReportTable() {
       </Card>
 
       {/* Modal detail */}
-      <Dialog
-        open={!!selectedReport}
-        onOpenChange={(open) => !open && setSelectedReport(null)}
-      >
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Detail Laporan</DialogTitle>
-            <DialogDescription>
-              Informasi lengkap laporan Anda
-            </DialogDescription>
-          </DialogHeader>
-
-          {selectedReport && (
-            <div className="space-y-6">
-              {selectedReport.imageUrl && (
-                <img
-                  src={selectedReport.imageUrl}
-                  alt={selectedReport.namaBarang}
-                  className="max-h-64 mx-auto rounded-lg border"
-                />
-              )}
-              <div className="grid gap-4">
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Nama Barang
-                  </label>
-                  <p className="font-semibold">{selectedReport.namaBarang}</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Deskripsi
-                  </label>
-                  <p className="text-sm">{selectedReport.deskripsi}</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <p>{selectedReport.lokasiHilang}</p>
-                </div>
-                <div>
-                  <label className="text-sm text-muted-foreground">
-                    Tanggal Hilang
-                  </label>
-                  <p className="text-sm">
-                    {selectedReport.tanggal
-                      ? formatDate(selectedReport.tanggal)
-                      : "-"}
-                  </p>
-                </div>
-                <div className="pt-4 border-t">
-                  <Badge
-                    variant={getStatusBadge(selectedReport.status).variant}
-                  >
-                    {getStatusBadge(selectedReport.status).label}
-                  </Badge>
-                </div>
-              </div>
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      <LostReportDialog
+        selectedReport={selectedReport}
+        setSelectedReport={setSelectedReport}
+      />
     </>
   );
 }

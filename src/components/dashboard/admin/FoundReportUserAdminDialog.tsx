@@ -9,6 +9,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { MapPin } from "lucide-react";
 import { AdminFoundReport } from "@/types/foundReports";
 
@@ -19,54 +20,74 @@ export function FoundReportUserAdminDialog({
   selectedReport: AdminFoundReport | null;
   setSelectedReport: (r: AdminFoundReport | null) => void;
 }) {
+  if (!selectedReport) return null;
+
+  const status = {
+    PENDING: { variant: "secondary" as const, label: "Pending" },
+    CLAIMED: { variant: "default" as const, label: "Ditemukan" },
+    APPROVED: { variant: "default" as const, label: "Disetujui" },
+    REJECTED: { variant: "destructive" as const, label: "Ditolak" },
+  }[selectedReport.statusFound] ?? {
+    variant: "secondary",
+    label: "Unknown",
+  };
+
   return (
-    <Dialog
-      open={!!selectedReport}
-      onOpenChange={() => setSelectedReport(null)}
-    >
+    <Dialog open onOpenChange={() => setSelectedReport(null)}>
       <DialogContent className="max-w-xl rounded-lg p-6">
-        <DialogHeader className="space-y-1">
+        <DialogHeader>
           <DialogTitle className="text-xl font-bold">
-            Detail Laporan
+            Detail Laporan Penemuan
           </DialogTitle>
-          <DialogDescription className="text-sm text-muted-foreground">
-            Informasi lengkap laporan pengguna
+          <DialogDescription>
+            Informasi lengkap laporan yang ditampilkan di tabel
           </DialogDescription>
         </DialogHeader>
 
-        {selectedReport && (
-          <div className="space-y-4 text-sm">
-            {selectedReport.imageUrl && (
-              <img
-                src={selectedReport.imageUrl}
-                alt={selectedReport.namaBarang}
-                className="h-32 mx-auto object-contain rounded-md border"
-              />
-            )}
+        {/* CONTENT */}
+        <div className="space-y-5 text-sm">
+          {/* Image */}
+          {selectedReport.imageUrl && (
+            <img
+              src={selectedReport.imageUrl}
+              alt={selectedReport.namaBarang}
+              className="h-40 w-full object-contain rounded-md border"
+            />
+          )}
 
-            <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Nama Barang</p>
-              <p className="font-semibold">{selectedReport.namaBarang}</p>
-            </div>
+          {/* Nama Barang */}
+          <div>
+            <p className="text-muted-foreground text-xs mb-1">Nama Barang</p>
+            <p className="font-semibold text-base">
+              {selectedReport.namaBarang}
+            </p>
+          </div>
 
-            <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Deskripsi</p>
-              <p className="leading-relaxed">
-                {selectedReport.deskripsi || "-"}
+          {/* Deskripsi */}
+          <div>
+            <p className="text-muted-foreground text-xs mb-1">Deskripsi</p>
+            <p className="leading-relaxed">{selectedReport.deskripsi || "-"}</p>
+          </div>
+
+          {/* Lokasi */}
+          <div className="flex items-start gap-2">
+            <MapPin className="h-4 w-4 mt-1 text-muted-foreground" />
+            <div>
+              <p className="text-muted-foreground text-xs mb-1">
+                Lokasi Temuan
               </p>
-            </div>
-
-            <div className="space-y-1 flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-muted-foreground" />
-              <div>
-                <p className="text-sm text-muted-foreground">Lokasi</p>
-                <p className="font-medium">{selectedReport.lokasiTemu}</p>
-              </div>
+              <p className="font-medium">{selectedReport.lokasiTemu}</p>
             </div>
           </div>
-        )}
 
-        <DialogFooter className="pt-2">
+          {/* Status */}
+          <div>
+            <p className="text-muted-foreground text-xs mb-1">Status</p>
+            <Badge variant={status.variant}>{status.label}</Badge>
+          </div>
+        </div>
+
+        <DialogFooter className="pt-4">
           <Button variant="outline" onClick={() => setSelectedReport(null)}>
             Tutup
           </Button>

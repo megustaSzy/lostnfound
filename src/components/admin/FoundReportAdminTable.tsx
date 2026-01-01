@@ -147,10 +147,11 @@ export default function FoundReportAdminTable() {
                   <TableHead className="w-[40px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     No
                   </TableHead>
-                  <TableHead className="w-[40px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[180px] text-left text-xs font-semibold uppercase text-muted-foreground">
                     Barang
                   </TableHead>
-                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+
+                  <TableHead className="w-[280px] text-left text-xs font-semibold uppercase text-muted-foreground">
                     Deskripsi
                   </TableHead>
                   <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
@@ -175,15 +176,19 @@ export default function FoundReportAdminTable() {
                       {(currentPage - 1) * rowLimit + (idx + 1)}
                     </TableCell>
 
-                    <TableCell className="font-medium">
-                      {getNamaBarang(report)}
+                    <TableCell className="align-top">
+                      <p className="font-medium text-sm break-words whitespace-normal line-clamp-2">
+                        {getNamaBarang(report)}
+                      </p>
                     </TableCell>
 
-                    <TableCell className="text-sm text-slate-600 max-w-[300px] truncate">
-                      {getDeskripsi(report)}
+                    <TableCell className="text-center align-top">
+                      <p className="text-sm text-slate-600 break-words whitespace-normal line-clamp-3">
+                        {getDeskripsi(report)}
+                      </p>
                     </TableCell>
 
-                    <TableCell className="text-center">
+                    <TableCell className="text-center align-top">
                       <div className="flex justify-center gap-1 items-center">
                         <MapPin className="h-4 w-4" />
                         {getLokasi(report)}

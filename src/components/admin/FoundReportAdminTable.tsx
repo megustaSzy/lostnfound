@@ -147,11 +147,11 @@ export default function FoundReportAdminTable() {
                   <TableHead className="w-[40px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     No
                   </TableHead>
-                  <TableHead className="w-[180px] text-left text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[40px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Barang
                   </TableHead>
 
-                  <TableHead className="w-[280px] text-left text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Deskripsi
                   </TableHead>
                   <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">

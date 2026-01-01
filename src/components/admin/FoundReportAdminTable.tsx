@@ -144,7 +144,9 @@ export default function FoundReportAdminTable() {
             <Table className="table-fixed w-full">
               <TableHeader>
                 <TableRow className="bg-muted/50 border-b">
-                  <TableHead className="w-[60px] text-center">No</TableHead>
+                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    No
+                  </TableHead>
                   <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Barang
                   </TableHead>

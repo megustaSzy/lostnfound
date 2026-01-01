@@ -148,7 +148,7 @@ export default function FoundReportUserAdminTable() {
 
                         {/* Barang */}
                         <TableCell className="text-center">
-                          <p className="text-sm font-semibold line-clamp-1">
+                          <p className="font-medium text-sm break-words whitespace-normal line-clamp-2">
                             {report.namaBarang}
                           </p>
                         </TableCell>

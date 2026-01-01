@@ -149,121 +149,139 @@ export default function LostReportsTable() {
 
         <CardContent>
           <div className="rounded-lg border overflow-hidden">
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-muted/40">
-                    {[
-                      "No",
-                      "Barang",
-                      "Lokasi",
-                      "Pelapor",
-                      "Tanggal",
-                      "Status",
-                      "Aksi",
-                    ].map((h) => (
-                      <TableHead
-                        key={h}
-                        className="text-center text-xs font-semibold uppercase tracking-wide"
-                      >
-                        {h}
-                      </TableHead>
-                    ))}
-                  </TableRow>
-                </TableHeader>
+            <Table className="table-fixed w-full">
+              <TableHeader>
+                <TableRow className="bg-muted/50 border-b">
+                  <TableHead className="w-[40px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    No
+                  </TableHead>
 
-                <TableBody>
-                  {data.items.map((r, i) => (
-                    <TableRow key={r.id} className="hover:bg-muted/50">
-                      <TableCell className="text-center font-medium">
-                        {(data.current_page - 1) * data.limit + (i + 1)}
-                      </TableCell>
+                  <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Barang
+                  </TableHead>
 
-                      <TableCell className="text-center font-semibold">
+                  <TableHead className="w-[140px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Lokasi
+                  </TableHead>
+
+                  <TableHead className="w-[160px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Pelapor
+                  </TableHead>
+
+                  <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Tanggal
+                  </TableHead>
+
+                  <TableHead className="w-[100px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Status
+                  </TableHead>
+
+                  <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Aksi
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+
+              <TableBody>
+                {data.items.map((r, i) => (
+                  <TableRow key={r.id}>
+                    {/* NO */}
+                    <TableCell className="text-center">
+                      {(data.current_page - 1) * data.limit + (i + 1)}
+                    </TableCell>
+
+                    {/* BARANG */}
+                    <TableCell className="align-top">
+                      <p className="font-medium text-sm break-words line-clamp-2">
                         {r.namaBarang}
-                      </TableCell>
+                      </p>
+                    </TableCell>
 
-                      <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
-                          <MapPin className="h-3.5 w-3.5" />
-                          <span className="line-clamp-1">{r.lokasiHilang}</span>
-                        </div>
-                      </TableCell>
+                    {/* LOKASI */}
+                    <TableCell className="text-center align-top">
+                      <div className="flex justify-center items-center gap-1 text-sm text-muted-foreground">
+                        <MapPin className="h-4 w-4" />
+                        <span className="line-clamp-1">{r.lokasiHilang}</span>
+                      </div>
+                    </TableCell>
 
-                      <TableCell className="text-center">
-                        <p className="text-sm font-medium">{r.user?.name}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {r.user?.email}
-                        </p>
-                      </TableCell>
+                    {/* PELAPOR */}
+                    <TableCell className="text-center align-top">
+                      <p className="text-sm font-medium">{r.user?.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {r.user?.email}
+                      </p>
+                    </TableCell>
 
-                      <TableCell className="text-center text-xs">
-                        {formatDate(r.tanggal ?? r.createdAt)}
-                      </TableCell>
+                    {/* TANGGAL */}
+                    <TableCell className="text-center text-sm">
+                      {formatDate(r.tanggal ?? r.createdAt)}
+                    </TableCell>
 
-                      <TableCell className="text-center">
-                        <LostReportsStatusBadge status={r.status} />
-                      </TableCell>
+                    {/* STATUS */}
+                    <TableCell className="text-center">
+                      <LostReportsStatusBadge status={r.status} />
+                    </TableCell>
 
-                      <TableCell className="text-center">
-                        <div className="flex justify-center gap-1.5">
-                          {r.status === "PENDING" && (
-                            <>
-                              <Button
-                                size="icon"
-                                variant="outline"
-                                className="h-8 w-8 hover:border-green-400"
-                                disabled={loadingAction === r.id}
-                                onClick={() =>
-                                  setConfirmAction({
-                                    id: r.id,
-                                    status: "APPROVED",
-                                  })
-                                }
-                              >
-                                {loadingAction === r.id ? (
-                                  <Loader2 className="h-4 w-4 animate-spin" />
-                                ) : (
-                                  <Check className="h-4 w-4 text-green-600" />
-                                )}
-                              </Button>
+                    {/* AKSI */}
+                    <TableCell className="text-center">
+                      <div className="flex justify-center gap-2">
+                        {r.status === "PENDING" && (
+                          <>
+                            <Button
+                              size="icon"
+                              variant="outline"
+                              className="h-8 w-8 hover:border-green-400"
+                              disabled={loadingAction === r.id}
+                              onClick={() =>
+                                setConfirmAction({
+                                  id: r.id,
+                                  status: "APPROVED",
+                                })
+                              }
+                            >
+                              {loadingAction === r.id ? (
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                              ) : (
+                                <Check className="h-4 w-4 text-green-600" />
+                              )}
+                            </Button>
 
-                              <Button
-                                size="icon"
-                                variant="outline"
-                                className="h-8 w-8 hover:border-red-400"
-                                disabled={loadingAction === r.id}
-                                onClick={() =>
-                                  setConfirmAction({
-                                    id: r.id,
-                                    status: "REJECTED",
-                                  })
-                                }
-                              >
-                                {loadingAction === r.id ? (
-                                  <Loader2 className="h-4 w-4 animate-spin" />
-                                ) : (
-                                  <X className="h-4 w-4 text-red-600" />
-                                )}
-                              </Button>
-                            </>
-                          )}
+                            <Button
+                              size="icon"
+                              variant="outline"
+                              className="h-8 w-8 hover:border-red-400"
+                              disabled={loadingAction === r.id}
+                              onClick={() =>
+                                setConfirmAction({
+                                  id: r.id,
+                                  status: "REJECTED",
+                                })
+                              }
+                            >
+                              {loadingAction === r.id ? (
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                              ) : (
+                                <X className="h-4 w-4 text-red-600" />
+                              )}
+                            </Button>
+                          </>
+                        )}
 
-                          <Button
-                            size="icon"
-                            variant="outline"
-                            className="h-8 w-8"
-                            onClick={() => setSelectedReport(r)}
-                          >
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+                        <Button
+                          size="icon"
+                          variant="outline"
+                          className="h-8 w-8"
+                          onClick={() => setSelectedReport(r)}
+                        >
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
 
           {data.total_pages > 1 && (

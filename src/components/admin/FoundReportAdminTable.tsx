@@ -143,14 +143,26 @@ export default function FoundReportAdminTable() {
           <div className="rounded-lg border overflow-hidden">
             <Table className="table-fixed w-full">
               <TableHeader>
-                <TableRow>
+                <TableRow className="bg-muted/50 border-b">
                   <TableHead className="w-[60px] text-center">No</TableHead>
-                  <TableHead>Barang</TableHead>
-                  <TableHead>Deskripsi</TableHead>
-                  <TableHead>Lokasi</TableHead>
-                  <TableHead className="text-center">Pelapor</TableHead>
-                  <TableHead className="text-center">Status</TableHead>
-                  <TableHead className="text-center">Aksi</TableHead>
+                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Barang
+                  </TableHead>
+                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Deskripsi
+                  </TableHead>
+                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Lokasi
+                  </TableHead>
+                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Pelapor
+                  </TableHead>
+                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Status
+                  </TableHead>
+                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    Aksi
+                  </TableHead>
                 </TableRow>
               </TableHeader>
 

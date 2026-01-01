@@ -51,7 +51,7 @@ export default function FoundReportUserAdminTable() {
   const [selectedReport, setSelectedReport] = useState<AdminFoundReport | null>(
     null
   );
-  const isLoading = !data && !error && !isValidating;
+  const isInitialLoading = !data && !error;
 
   if (error) {
     return (
@@ -86,7 +86,7 @@ export default function FoundReportUserAdminTable() {
       </CardHeader>
 
       <CardContent>
-        {isLoading ? (
+        {isInitialLoading ? (
           <div className="space-y-2">
             <Skeleton className="h-10 w-full" />
             {Array.from({ length: 5 }).map((_, i) => (

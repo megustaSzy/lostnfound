@@ -31,6 +31,13 @@ import { FileSearch, MapPin, Eye } from "lucide-react";
 import { Pagination } from "@/components/admin/users/Pagination";
 import { FoundReportUserAdminDialog } from "@/components/dashboard/admin/FoundReportUserAdminDialog";
 
+const formatDate = (date: string) =>
+  new Date(date).toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+
 export default function FoundReportUserAdminTable() {
   const [page, setPage] = useState(1);
   const limit = 10;
@@ -106,11 +113,14 @@ export default function FoundReportUserAdminTable() {
                     <TableHead className="w-[180px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Barang
                     </TableHead>
-                    <TableHead className="w-[240px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[200px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Deskripsi
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[140px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Lokasi
+                    </TableHead>
+                    <TableHead className="w-[160px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                      Tanggal
                     </TableHead>
                     <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Status
@@ -158,6 +168,17 @@ export default function FoundReportUserAdminTable() {
                               {report.lokasiTemu}
                             </span>
                           </div>
+                        </TableCell>
+
+                        {/* Tanggal */}
+                        <TableCell className="text-center">
+                          <p className="text-xs font-medium text-muted-foreground">
+                            {report.tanggal
+                              ? formatDate(report.tanggal)
+                              : report.createdAt
+                              ? formatDate(report.createdAt)
+                              : "-"}
+                          </p>
                         </TableCell>
 
                         {/* Status */}

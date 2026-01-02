@@ -155,7 +155,7 @@ export default function LostReportsTable() {
                   <TableHead className="w-[50px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     No
                   </TableHead>
-                  <TableHead className="w-[130px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[150px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Barang
                   </TableHead>
                   <TableHead className="w-[150px] text-center text-xs font-semibold uppercase text-muted-foreground">

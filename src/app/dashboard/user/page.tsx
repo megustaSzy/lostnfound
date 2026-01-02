@@ -7,6 +7,7 @@ import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { SiteHeader } from "@/components/SiteHeader";
 import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
+import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 
 import { FileSearch, CheckCircle2 } from "lucide-react";
 import { userDashboardFetcher } from "@/lib/fetchers/userDashboardFetcher";
@@ -16,15 +17,19 @@ import { ReportsChart } from "@/components/dashboard/user/ReportsChart";
 import { SummaryCard } from "@/components/dashboard/user/SummaryCard";
 
 export default function UserDashboard() {
-  const { user, loading: userLoading } = useUser();
+  const { user, loading } = useUser();
 
-  const { data } = useSWR(
+  const { data, isLoading } = useSWR(
     user ? "/api/dashboard/user" : null,
     userDashboardFetcher
   );
 
-  if (userLoading || !user || !data) {
+  if (loading || (user && isLoading)) {
     return <FullscreenLoader message="Memuat dashboard user..." />;
+  }
+
+  if (!user) {
+    return <UnauthenticatedAlert />;
   }
 
   const statsData = [

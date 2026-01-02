@@ -8,7 +8,7 @@ export function HomeHeader() {
         <div className="flex items-center justify-between">
           {/* Title */}
           <h1 className="text-lg sm:text-2xl font-bold text-blue-600">
-            XYZ Lost & Found
+            Lost & Found
           </h1>
 
           {/* Action Buttons */}

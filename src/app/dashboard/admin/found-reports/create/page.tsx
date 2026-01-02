@@ -13,14 +13,14 @@ import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 export default function CreateFoundReportPage() {
   const { user, loading } = useUser();
 
-  // BELUM LOGIN
-  if (!loading && !user) {
-    return <UnauthenticatedAlert />;
-  }
-
-  // LOADING USER
+  // ⏳ Loading user
   if (loading) {
     return <FullscreenLoader message="Memuat data user..." />;
+  }
+
+  // 🚫 Belum login
+  if (!user) {
+    return <UnauthenticatedAlert />;
   }
 
   return (
@@ -33,8 +33,8 @@ export default function CreateFoundReportPage() {
       }
     >
       <AppSidebar
-        role={user!.role}
-        user={{ name: user!.name, email: user!.email }}
+        role={user.role}
+        user={{ name: user.name, email: user.email }}
       />
 
       <SidebarInset>

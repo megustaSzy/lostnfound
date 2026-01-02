@@ -13,14 +13,12 @@ import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 export default function LostReportsPage() {
   const { user, loading } = useUser();
 
-  // UNAUTH
-  if (!loading && !user) {
-    return <UnauthenticatedAlert />;
-  }
-
-  // LOADING
   if (loading) {
     return <FullscreenLoader message="Memuat data user..." />;
+  }
+
+  if (!user) {
+    return <UnauthenticatedAlert />;
   }
 
   return (
@@ -33,8 +31,8 @@ export default function LostReportsPage() {
       }
     >
       <AppSidebar
-        role={user!.role}
-        user={{ name: user!.name, email: user!.email }}
+        role={user.role}
+        user={{ name: user.name, email: user.email }}
       />
 
       <SidebarInset>

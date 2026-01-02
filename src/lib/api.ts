@@ -5,26 +5,45 @@ export const api = axios.create({
   withCredentials: true,
 });
 
+let isRefreshing = false;
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const status = error.response?.status;
-    const url = error.config?.url;
+    const originalRequest = error.config;
+    const url = originalRequest?.url;
 
     if (
       status === 401 &&
+      !originalRequest._retry &&
       !url?.includes("/auth/login") &&
       !url?.includes("/auth/refresh")
     ) {
+      originalRequest._retry = true;
+
+      if (isRefreshing) {
+        return Promise.reject(error);
+      }
+
+      isRefreshing = true;
+
       try {
         await api.post("/api/auth/refresh");
-        return api(error.config);
+        isRefreshing = false;
+
+        return api(originalRequest);
       } catch {
+        isRefreshing = false;
+
+        if (typeof window !== "undefined") {
+          window.location.href = "/login";
+        }
+
         return Promise.reject(error);
       }
     }
 
-    // ⬅️ PENTING: lempar error ke FE
     return Promise.reject(error);
   }
 );

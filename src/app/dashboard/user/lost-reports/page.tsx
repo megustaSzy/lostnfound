@@ -2,30 +2,23 @@
 
 import LostReportTable from "@/components/user/lost-reports/LostReportTable";
 import { useUser } from "@/hooks/useUser";
-import { withAuth } from "@/lib/withAuth";
 
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { SiteHeader } from "@/components/SiteHeader";
 
 import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
+import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 
-function LostReportsPage() {
+export default function LostReportsPage() {
   const { user, loading } = useUser();
 
-  // Loader fullscreen sekali saja
   if (loading) {
     return <FullscreenLoader message="Memuat data pengguna..." />;
   }
 
   if (!user) {
-    return (
-      <div className="flex min-h-screen items-center justify-center p-4">
-        <p className="text-red-500 font-medium">
-          Anda harus login untuk mengakses halaman ini!
-        </p>
-      </div>
-    );
+    return <UnauthenticatedAlert />;
   }
 
   return (
@@ -54,12 +47,9 @@ function LostReportsPage() {
             </p>
           </div>
 
-          {/* Table component */}
           <LostReportTable />
         </div>
       </SidebarInset>
     </SidebarProvider>
   );
 }
-
-export default withAuth(LostReportsPage);

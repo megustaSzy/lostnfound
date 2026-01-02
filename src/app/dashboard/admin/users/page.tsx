@@ -1,4 +1,3 @@
-// app/dashboard/admin/users/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -15,18 +14,23 @@ import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
 import { usersFetcher } from "@/lib/fetchers/usersFetcher";
 
 export default function UsersPage() {
-  const { user, loading: userLoading } = useUser();
+  const { user, loading } = useUser();
   const [page, setPage] = useState(1);
   const limit = 10;
 
-  const swrKey = `/api/users?page=${page}&limit=${limit}`;
+  const swrKey = user ? `/api/users?page=${page}&limit=${limit}` : null;
 
-  const { data, error } = useSWR(swrKey, usersFetcher, {
+  const { data, error, isLoading } = useSWR(swrKey, usersFetcher, {
     revalidateOnFocus: false,
   });
 
-  if (userLoading) return <FullscreenLoader validating={false} />;
-  if (!user) return <UnauthenticatedAlert />;
+  if (loading || (user && isLoading)) {
+    return <FullscreenLoader validating={false} />;
+  }
+
+  if (!user) {
+    return <UnauthenticatedAlert />;
+  }
 
   return (
     <SidebarProvider
@@ -59,20 +63,20 @@ export default function UsersPage() {
               users={data?.items ?? []}
               currentPage={data?.current_page ?? 1}
               limit={data?.limit && data.limit > 0 ? data.limit : 10}
-              isLoading={!data && !error}
+              isLoading={isLoading}
               error={error}
-              swrKey={swrKey}
+              swrKey={swrKey!}
             />
 
-            {data && data.total_pages > 1 ? (
+            {data && data.total_pages > 1 && (
               <div className="mt-4 flex justify-center">
                 <Pagination
-                  currentPage={data.current_page > 0 ? data.current_page : 1}
+                  currentPage={data.current_page}
                   totalPages={data.total_pages}
                   onPageChange={setPage}
                 />
               </div>
-            ) : null}
+            )}
           </UsersCard>
         </div>
       </SidebarInset>

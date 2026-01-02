@@ -13,8 +13,8 @@ export function HomeHero() {
 
       {/* Description */}
       <p className="mx-auto max-w-2xl text-base sm:text-lg text-slate-600">
-        Lost and Found adalah platform penemuan dan pelaporan barang hilang di
-        Universitas XYZ.
+        Lost and Found adalah platform yang memfasilitasi penemuan dan pelaporan
+        barang hilang yang terjadi di area rental PlayStation.
       </p>
 
       {/* CTA Buttons */}

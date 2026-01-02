@@ -13,16 +13,14 @@ import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 export default function FoundReportsAdminPage() {
   const { user, loading } = useUser();
 
-  // BELUM LOGIN
-  if (!loading && !user) {
-    return <UnauthenticatedAlert />;
-  }
-
-  // LOADING USER (SATU LOADER GLOBAL)
   if (loading) {
     return (
       <FullscreenLoader validating={false} message="Memuat data user..." />
     );
+  }
+
+  if (!user) {
+    return <UnauthenticatedAlert />;
   }
 
   return (
@@ -35,10 +33,10 @@ export default function FoundReportsAdminPage() {
       }
     >
       <AppSidebar
-        role={user!.role}
+        role={user.role}
         user={{
-          name: user!.name,
-          email: user!.email,
+          name: user.name,
+          email: user.email,
         }}
       />
 

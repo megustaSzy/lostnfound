@@ -6,22 +6,21 @@ import { SiteHeader } from "@/components/SiteHeader";
 
 import LostReportForm from "@/components/user/lost-reports/LostReportForm";
 import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
+import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 
 import { useUser } from "@/hooks/useUser";
 
 export default function LostReportCreatePage() {
-  const { user, loading: userLoading } = useUser();
+  const { user, loading } = useUser();
 
-  if (userLoading || !user) {
-    return (
-      <FullscreenLoader
-        message={
-          userLoading
-            ? "Memuat data pengguna..."
-            : "Tidak ada akses. Silakan login kembali."
-        }
-      />
-    );
+  // ⏳ Loading user
+  if (loading) {
+    return <FullscreenLoader message="Memuat data pengguna..." />;
+  }
+
+  // 🚫 Belum login
+  if (!user) {
+    return <UnauthenticatedAlert />;
   }
 
   return (

@@ -7,6 +7,7 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
+import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 
 import { adminDashboardFetcher } from "@/lib/fetchers/adminDashboardFetcher";
 
@@ -16,17 +17,18 @@ import { SummaryCard } from "@/components/dashboard/admin/SummaryCard";
 
 export default function AdminDashboard() {
   const { user, loading: userLoading } = useUser();
+
   const { data, isLoading } = useSWR(
-    "/api/dashboard/admin",
+    user ? "/api/dashboard/admin" : null,
     adminDashboardFetcher
   );
 
-  if (userLoading || isLoading) {
+  if (userLoading || (user && isLoading)) {
     return <FullscreenLoader message="Memuat dashboard admin..." />;
   }
 
   if (!user) {
-    return <FullscreenLoader message="Anda harus login..." />;
+    return <UnauthenticatedAlert />;
   }
 
   return (

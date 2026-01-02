@@ -177,7 +177,7 @@ export default function LostReportsTable() {
                   </TableHead>
 
                   <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
-                    Aksi
+                    Detail
                   </TableHead>
                 </TableRow>
               </TableHeader>

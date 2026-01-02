@@ -151,28 +151,22 @@ export default function LostReportsTable() {
                   <TableHead className="w-[50px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     No
                   </TableHead>
-
-                  <TableHead className="w-[200px] text-left text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[150px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Barang
                   </TableHead>
-
-                  <TableHead className="w-[180px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[150px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Lokasi
                   </TableHead>
-
-                  <TableHead className="w-[200px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[170px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Pelapor
                   </TableHead>
-
                   <TableHead className="w-[140px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Tanggal
                   </TableHead>
-
-                  <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[100px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Status
                   </TableHead>
-
-                  <TableHead className="w-[140px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[110px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Aksi
                   </TableHead>
                 </TableRow>
@@ -180,43 +174,39 @@ export default function LostReportsTable() {
 
               <TableBody>
                 {data.items.map((r, i) => (
-                  <TableRow key={r.id} className="border-b align-top">
+                  <TableRow key={r.id} className="border-b">
                     {/* NO */}
-                    <TableCell className="w-[50px] text-center font-medium align-top">
+                    <TableCell className="text-center font-medium">
                       {(data.current_page - 1) * data.limit + (i + 1)}
                     </TableCell>
 
                     {/* BARANG */}
-                    <TableCell className="w-[200px] align-top">
-                      <p className="font-medium break-words whitespace-normal line-clamp-2">
+                    <TableCell className="align-top text-left">
+                      <p className="font-medium text-sm break-words line-clamp-2 text-center">
                         {r.namaBarang}
                       </p>
                     </TableCell>
 
                     {/* LOKASI */}
-                    <TableCell className="w-[180px] align-top">
-                      <div className="flex items-center justify-center gap-1 text-muted-foreground">
+                    <TableCell className="text-center align-top">
+                      <div className="flex justify-center items-center gap-1 text-muted-foreground">
                         <MapPin className="h-4 w-4 shrink-0" />
-                        <span className="break-words whitespace-normal line-clamp-2">
+                        <span className="line-clamp-1 break-all">
                           {r.lokasiHilang}
                         </span>
                       </div>
                     </TableCell>
 
                     {/* PELAPOR */}
-                    <TableCell className="w-[200px] align-top">
-                      <div className="text-center">
-                        <p className="font-medium leading-tight">
-                          {r.user?.name}
-                        </p>
-                        <p className="text-xs text-muted-foreground truncate">
-                          {r.user?.email}
-                        </p>
-                      </div>
+                    <TableCell className="text-center align-top">
+                      <p className="font-medium">{r.user?.name}</p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {r.user?.email}
+                      </p>
                     </TableCell>
 
                     {/* TANGGAL */}
-                    <TableCell className="w-[140px] text-center align-top">
+                    <TableCell className="text-center">
                       <p className="text-xs font-medium text-muted-foreground">
                         {r.tanggal
                           ? formatDate(r.tanggal)
@@ -227,12 +217,12 @@ export default function LostReportsTable() {
                     </TableCell>
 
                     {/* STATUS */}
-                    <TableCell className="w-[120px] text-center align-top">
+                    <TableCell className="text-center">
                       <LostReportsStatusBadge status={r.status} />
                     </TableCell>
 
                     {/* AKSI */}
-                    <TableCell className="w-[140px] text-center align-top">
+                    <TableCell className="text-center">
                       <div className="flex justify-center items-center gap-2">
                         {r.status === "PENDING" && (
                           <>

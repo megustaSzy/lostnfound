@@ -106,7 +106,7 @@ export function UsersTable({
                   </TableCell>
 
                   <TableCell className="text-center">
-                    <p className="text-xs text-muted-foreground">
+                    <p className="text-sm font-medium text-muted-foreground line-clamp-1">
                       {u.notelp || "-"}
                     </p>
                   </TableCell>

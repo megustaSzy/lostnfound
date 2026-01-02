@@ -97,24 +97,19 @@ export default function FoundReportsTable({
                     <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       No
                     </TableHead>
-
-                    <TableHead className="w-[180px] text-left text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[180px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Barang
                     </TableHead>
-
-                    <TableHead className="w-[260px] text-left text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[240px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Deskripsi
                     </TableHead>
-
                     <TableHead className="w-[200px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Lokasi
                     </TableHead>
-
                     <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Status
                     </TableHead>
-
-                    <TableHead className="w-[100px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                    <TableHead className="w-[80px] text-center text-xs font-semibold uppercase text-muted-foreground">
                       Detail
                     </TableHead>
                   </TableRow>
@@ -125,46 +120,46 @@ export default function FoundReportsTable({
                   {data.map((report, idx) => (
                     <TableRow
                       key={report.id}
-                      className="hover:bg-muted/40 transition-colors align-top"
+                      className="hover:bg-muted/40 transition-colors"
                     >
                       {/* No */}
-                      <TableCell className="w-[60px] text-center text-sm font-medium align-top">
+                      <TableCell className="text-center text-sm font-medium">
                         {(currentPage - 1) * limit + (idx + 1)}
                       </TableCell>
 
                       {/* Barang */}
-                      <TableCell className="w-[180px] align-top">
-                        <p className="text-sm font-semibold break-words whitespace-normal line-clamp-2">
+                      <TableCell className="text-center">
+                        <p className="text-sm font-semibold line-clamp-1">
                           {report.namaBarang}
                         </p>
                       </TableCell>
 
                       {/* Deskripsi */}
-                      <TableCell className="w-[260px] align-top">
-                        <p className="text-sm text-muted-foreground break-words whitespace-normal line-clamp-3">
+                      <TableCell className="text-center">
+                        <p className="text-xs text-muted-foreground line-clamp-2">
                           {report.deskripsi || "-"}
                         </p>
                       </TableCell>
 
                       {/* Lokasi */}
-                      <TableCell className="w-[200px] align-top">
-                        <div className="flex items-center justify-center gap-1.5 text-muted-foreground">
-                          <MapPin className="h-4 w-4 shrink-0" />
-                          <span className="text-sm break-words whitespace-normal line-clamp-2">
+                      <TableCell className="text-center">
+                        <div className="flex items-center justify-center gap-1.5">
+                          <MapPin className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                          <span className="text-xs text-muted-foreground line-clamp-1">
                             {report.lokasiTemu}
                           </span>
                         </div>
                       </TableCell>
 
                       {/* Status */}
-                      <TableCell className="w-[120px] text-center align-top">
+                      <TableCell className="text-center">
                         <div className="flex justify-center">
                           <Badge variant="default">Ditemukan</Badge>
                         </div>
                       </TableCell>
 
                       {/* Detail */}
-                      <TableCell className="w-[100px] text-center align-top">
+                      <TableCell className="text-center">
                         <Button
                           size="icon"
                           variant="outline"

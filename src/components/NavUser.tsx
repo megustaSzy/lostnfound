@@ -59,7 +59,7 @@ export function NavUser({ user }: NavUserProps) {
               "
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarImage src={user.imageUrl} alt={user.name} />
                 <AvatarFallback className="rounded-lg bg-slate-200 text-slate-700">
                   {getInitials(user.name)}
                 </AvatarFallback>
@@ -86,7 +86,7 @@ export function NavUser({ user }: NavUserProps) {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-3 px-2 py-2">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage src={user.imageUrl} alt={user.name} />
                   <AvatarFallback className="rounded-lg bg-slate-200 text-slate-700">
                     {getInitials(user.name)}
                   </AvatarFallback>

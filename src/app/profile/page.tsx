@@ -12,6 +12,7 @@ import { ProfileCard } from "@/components/profile/ProfileCard";
 import { ProfileForm } from "@/components/profile/ProfileForm";
 import { ProfileAlert } from "@/components/profile/ProfileAlert";
 import { FullscreenLoader } from "@/components/loaders/FullscreenLoader";
+import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 
 export default function ProfilePage() {
   const { user, loading, refreshUser } = useUser();
@@ -22,7 +23,7 @@ export default function ProfilePage() {
   }
 
   if (!user) {
-    return <div className="p-10">Anda harus login!</div>;
+    return <UnauthenticatedAlert />;
   }
 
   return (

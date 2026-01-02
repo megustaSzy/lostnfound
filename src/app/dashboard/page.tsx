@@ -12,15 +12,15 @@ export default function DashboardPage() {
   useEffect(() => {
     if (!loading) {
       if (!user) {
-        router.push("/login");
+        router.replace("/login"); 
       } else if (user.role === "Admin") {
-        router.push("/dashboard/admin");
+        router.replace("/dashboard/admin");
       } else {
-        router.push("/dashboard/user");
+        router.replace("/dashboard/user");
       }
     }
   }, [user, loading, router]);
 
-  // Ganti div biasa dengan fullscreen loader
+  // Loader tetap ditampilkan selama cek user
   return <FullscreenLoader message="Memeriksa sesi pengguna..." />;
 }

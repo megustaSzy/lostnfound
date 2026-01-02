@@ -24,8 +24,8 @@ export default function UsersPage() {
     revalidateOnFocus: false,
   });
 
-  if (loading || (user && isLoading)) {
-    return <FullscreenLoader validating={false} />;
+  if (loading) {
+    return <FullscreenLoader message="Memuat data user..." />;
   }
 
   if (!user) {

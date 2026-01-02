@@ -13,12 +13,10 @@ import { UnauthenticatedAlert } from "@/components/errors/UnauthenticatedAlert";
 export default function CreateFoundReportPage() {
   const { user, loading } = useUser();
 
-  // ⏳ Loading user
   if (loading) {
     return <FullscreenLoader message="Memuat data user..." />;
   }
 
-  // 🚫 Belum login
   if (!user) {
     return <UnauthenticatedAlert />;
   }

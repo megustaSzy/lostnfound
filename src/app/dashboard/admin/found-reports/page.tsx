@@ -14,9 +14,7 @@ export default function FoundReportsAdminPage() {
   const { user, loading } = useUser();
 
   if (loading) {
-    return (
-      <FullscreenLoader validating={false} message="Memuat data user..." />
-    );
+    return <FullscreenLoader message="Memuat data user..." />;
   }
 
   if (!user) {

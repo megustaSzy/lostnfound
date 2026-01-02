@@ -2,64 +2,55 @@
 
 import { useState, useEffect, useRef } from "react";
 import { api } from "@/lib/api";
-
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-  notelp: string;
-  role: "Admin" | "User";
-  imageUrl?: string;
-  imagePublicId?: string;
-}
+import { authEvent } from "@/lib/authEvents";
+import { User } from "@/types/user";
 
 export function useUser() {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [initialized, setInitialized] = useState(false);
 
   const abortRef = useRef<AbortController | null>(null);
 
   const fetchUser = async () => {
-    // Batalkan request sebelumnya (jika ada)
     abortRef.current?.abort();
-
     const controller = new AbortController();
     abortRef.current = controller;
 
-    setLoading(true);
-
     try {
-      const res = await api.get<{
-        success: boolean;
-        message: string;
-        data: User;
-      }>("/api/users/profile", {
+      const res = await api.get("/api/users/profile", {
         signal: controller.signal,
       });
 
       setUser(res.data.data);
     } catch (err: any) {
-      // Abaikan error akibat abort
       if (err.name !== "CanceledError" && err.name !== "AbortError") {
         setUser(null);
       }
     } finally {
-      setLoading(false);
+      setInitialized(true);
     }
   };
 
   useEffect(() => {
     fetchUser();
 
-    return () => {
-      // Abort saat unmount
+    const handleLogout = () => {
       abortRef.current?.abort();
+      setUser(null);
+      setInitialized(true);
+    };
+
+    authEvent.addEventListener("logout", handleLogout);
+
+    return () => {
+      abortRef.current?.abort();
+      authEvent.removeEventListener("logout", handleLogout);
     };
   }, []);
 
-  const refreshUser = async () => {
-    await fetchUser();
+  return {
+    user,
+    loading: !initialized,
+    refreshUser: fetchUser,
   };
-
-  return { user, loading, refreshUser };
 }

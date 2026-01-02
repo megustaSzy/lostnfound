@@ -155,16 +155,16 @@ export default function FoundReportUserAdminTable() {
 
                         {/* Deskripsi */}
                         <TableCell className="text-center">
-                          <p className="text-xs text-muted-foreground line-clamp-2">
+                          <p className="text-sm font-medium text-muted-foreground break-words whitespace-normal line-clamp-2">
                             {report.deskripsi || "-"}
                           </p>
                         </TableCell>
 
                         {/* Lokasi */}
-                        <TableCell className="text-center align-top">
-                          <div className="flex justify-center items-center gap-1 text-muted-foreground">
+                        <TableCell className="text-center">
+                          <div className="flex justify-center items-center gap-1 text-sm font-medium text-muted-foreground">
                             <MapPin className="h-4 w-4 shrink-0" />
-                            <span className="line-clamp-1 break-all">
+                            <span className="break-words whitespace-normal line-clamp-1">
                               {report.lokasiTemu}
                             </span>
                           </div>

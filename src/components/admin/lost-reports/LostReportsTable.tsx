@@ -189,9 +189,9 @@ export default function LostReportsTable() {
 
                     {/* LOKASI */}
                     <TableCell className="text-center">
-                      <div className="flex justify-center items-center gap-1 text-muted-foreground">
+                      <div className="flex justify-center items-center gap-1 text-sm font-medium text-muted-foreground">
                         <MapPin className="h-4 w-4 shrink-0" />
-                        <span className="line-clamp-1 break-all">
+                        <span className="break-words whitespace-normal line-clamp-1">
                           {r.lokasiHilang}
                         </span>
                       </div>

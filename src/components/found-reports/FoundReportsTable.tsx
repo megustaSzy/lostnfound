@@ -135,17 +135,18 @@ export default function FoundReportsTable({
                       </TableCell>
 
                       {/* Deskripsi */}
+                      {/* Deskripsi */}
                       <TableCell className="text-center">
-                        <p className="text-xs text-muted-foreground line-clamp-2">
+                        <p className="text-sm font-medium text-muted-foreground break-words whitespace-normal line-clamp-2">
                           {report.deskripsi || "-"}
                         </p>
                       </TableCell>
 
                       {/* Lokasi */}
                       <TableCell className="text-center">
-                        <div className="flex items-center justify-center gap-1.5">
-                          <MapPin className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-                          <span className="text-xs text-muted-foreground line-clamp-1">
+                        <div className="flex items-center justify-center gap-1 text-sm font-medium text-muted-foreground">
+                          <MapPin className="h-4 w-4 shrink-0" />
+                          <span className="break-words whitespace-normal line-clamp-1">
                             {report.lokasiTemu}
                           </span>
                         </div>

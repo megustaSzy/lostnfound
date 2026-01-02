@@ -170,22 +170,24 @@ export default function FoundReportAdminTable() {
                       {(currentPage - 1) * rowLimit + (idx + 1)}
                     </TableCell>
 
-                    <TableCell className="align-top">
+                    <TableCell className="text-center">
                       <p className="font-medium text-sm break-words whitespace-normal line-clamp-2">
                         {getNamaBarang(report)}
                       </p>
                     </TableCell>
 
-                    <TableCell className="text-center align-top">
+                    <TableCell className="text-center">
                       <p className="text-sm font-medium text-muted-foreground break-words whitespace-normal line-clamp-3">
                         {getDeskripsi(report)}
                       </p>
                     </TableCell>
 
                     <TableCell className="text-center align-top">
-                      <div className="flex justify-center items-center gap-1 text-muted-foreground">
+                      <div className="flex justify-center items-center gap-1 text-slate-600 font-semibold">
                         <MapPin className="h-4 w-4 shrink-0" />
-                        {getLokasi(report)}
+                        <span className="break-words whitespace-normal line-clamp-2">
+                          {getLokasi(report)}
+                        </span>
                       </div>
                     </TableCell>
 

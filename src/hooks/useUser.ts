@@ -3,7 +3,15 @@
 import { useState, useEffect, useRef } from "react";
 import { api } from "@/lib/api";
 import { authEvent } from "@/lib/authEvents";
-import { User } from "@/types/user";
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  notelp: string;
+  role: "Admin" | "User";
+  imageUrl?: string;
+  imagePublicId?: string;
+}
 
 export function useUser() {
   const [user, setUser] = useState<User | null>(null);

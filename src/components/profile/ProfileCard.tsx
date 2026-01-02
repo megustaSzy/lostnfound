@@ -18,8 +18,9 @@ export function ProfileCard({ user, onAvatarChange }: Props) {
   };
 
   return (
-    <div className="shadow-sm bg-white rounded-xl border">
-      <div className="p-6 flex flex-col items-center space-y-4">
+    <div className="bg-white rounded-xl border shadow-sm">
+      <div className="flex flex-col items-center space-y-4 p-6">
+        {/* Avatar dengan overlay kamera */}
         <label className="relative cursor-pointer group">
           <Avatar className="h-32 w-32 border-2 border-blue-200">
             {user.imageUrl ? (
@@ -31,45 +32,49 @@ export function ProfileCard({ user, onAvatarChange }: Props) {
             )}
           </Avatar>
 
-          <div className="absolute inset-0 rounded-full bg-blue-600/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+          <div className="absolute inset-0 flex items-center justify-center rounded-full bg-blue-600/40 opacity-0 transition group-hover:opacity-100">
             <Camera className="h-6 w-6 text-white" />
           </div>
 
           <input
             type="file"
             accept="image/*"
-            hidden
             onChange={handleFileChange}
+            hidden
           />
         </label>
 
+        {/* Informasi user */}
         <h2 className="text-xl font-bold text-slate-900 text-center">
           {user.name}
         </h2>
 
         <p className="text-sm text-slate-600 text-center">{user.email}</p>
 
+        {/* Badge status aktif */}
         <Badge className="bg-emerald-100 text-emerald-700 border border-emerald-300">
           <CheckCircle className="h-3 w-3 mr-1" />
           Active
         </Badge>
 
+        {/* Badge tahun */}
         <Badge
           variant="outline"
-          className="border-blue-300 bg-blue-50 text-blue-700"
+          className="bg-blue-50 border-blue-300 text-blue-700"
         >
           2025
         </Badge>
 
+        {/* Badge role */}
         <Badge
           variant="outline"
-          className="border-slate-300 bg-slate-50 text-slate-700 font-medium"
+          className="bg-slate-50 border-slate-300 text-slate-700 font-medium"
         >
           <Shield className="h-3 w-3 mr-1" strokeWidth={1.5} />
           {user.role}
         </Badge>
 
-        <Separator className="bg-slate-200 w-full" />
+        <Separator className="w-full bg-slate-200" />
       </div>
     </div>
   );

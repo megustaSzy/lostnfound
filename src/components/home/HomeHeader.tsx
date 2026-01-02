@@ -12,11 +12,11 @@ export function HomeHeader() {
           </h1>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-5">
             <Link href="/login">
               <Button
                 variant="outline"
-                className="h-10 min-w-[96px] px-5 text-sm sm:text-base
+                className="h-8 min-w-[96px] px-5 text-sm sm:text-base
                            border-blue-600 text-blue-600 hover:bg-blue-50
                            font-semibold"
               >
@@ -26,7 +26,7 @@ export function HomeHeader() {
 
             <Link href="/signup">
               <Button
-                className="h-10 min-w-[96px] px-5 text-sm sm:text-base
+                className="h-8 min-w-[96px] px-5 text-sm sm:text-base
                            font-semibold bg-blue-600 hover:bg-blue-700"
               >
                 Sign Up

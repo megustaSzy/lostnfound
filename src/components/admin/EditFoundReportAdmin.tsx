@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { FoundReportAdmin } from "@/types/foundReportAdmin";
 import { updateFound } from "@/services/found";
 import { useToast } from "@/components/ui/use-toast";
+import { Label } from "@/components/ui/label";
 
 interface Props {
   open: boolean;
@@ -29,7 +30,7 @@ export function EditFoundReportAdmin({
   report,
   swrKey,
 }: Props) {
-  const { toast } = useToast(); // ✅ PINDAH KE ATAS
+  const { toast } = useToast();
 
   const [form, setForm] = useState({
     namaBarang: "",
@@ -94,23 +95,35 @@ export function EditFoundReportAdmin({
         </DialogHeader>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <Input
-            placeholder="Nama barang"
-            value={form.namaBarang}
-            onChange={(e) => setForm({ ...form, namaBarang: e.target.value })}
-          />
+          <div>
+            <Label htmlFor="namaBarang">Nama Barang</Label>
+            <Input
+              id="namaBarang"
+              placeholder="Nama barang"
+              value={form.namaBarang}
+              onChange={(e) => setForm({ ...form, namaBarang: e.target.value })}
+            />
+          </div>
 
-          <Textarea
-            placeholder="Deskripsi"
-            value={form.deskripsi}
-            onChange={(e) => setForm({ ...form, deskripsi: e.target.value })}
-          />
+          <div>
+            <Label htmlFor="deskripsi">Deskripsi</Label>
+            <Textarea
+              id="deskripsi"
+              placeholder="Deskripsi"
+              value={form.deskripsi}
+              onChange={(e) => setForm({ ...form, deskripsi: e.target.value })}
+            />
+          </div>
 
-          <Input
-            placeholder="Lokasi ditemukan"
-            value={form.lokasiTemu}
-            onChange={(e) => setForm({ ...form, lokasiTemu: e.target.value })}
-          />
+          <div>
+            <Label htmlFor="lokasiTemu">Lokasi Ditemukan</Label>
+            <Input
+              id="lokasiTemu"
+              placeholder="Lokasi ditemukan"
+              value={form.lokasiTemu}
+              onChange={(e) => setForm({ ...form, lokasiTemu: e.target.value })}
+            />
+          </div>
 
           <DialogFooter>
             <Button type="submit" disabled={isSubmitting}>

@@ -161,10 +161,10 @@ export default function FoundReportUserAdminTable() {
                         </TableCell>
 
                         {/* Lokasi */}
-                        <TableCell className="text-center">
-                          <div className="flex items-center justify-center gap-1.5">
-                            <MapPin className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-                            <span className="text-xs text-muted-foreground line-clamp-1">
+                        <TableCell className="text-center align-top">
+                          <div className="flex justify-center items-center gap-1 text-muted-foreground">
+                            <MapPin className="h-4 w-4 shrink-0" />
+                            <span className="line-clamp-1 break-all">
                               {report.lokasiTemu}
                             </span>
                           </div>

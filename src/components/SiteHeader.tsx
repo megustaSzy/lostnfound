@@ -13,19 +13,21 @@ import { Menu, User, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { mutate } from "swr";
-import { authEvent } from "@/lib/authEvents";
 
 export function SiteHeader() {
   const router = useRouter();
 
   const handleLogout = async () => {
     try {
-      await fetch("/api/auth/logout", {
+      const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+      await fetch(`${BASE_URL}/api/auth/logout`, {
         method: "POST",
         credentials: "include",
       });
+    } catch (error) {
+      console.error("Logout API error:", error);
     } finally {
-      authEvent.dispatchEvent(new Event("logout"));
       router.replace("/login");
     }
   };

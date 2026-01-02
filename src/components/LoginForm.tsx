@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useLogin } from "@/hooks/useLogin";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 import { GoogleLoginButton } from "./GoogleLoginButton";
 
 import { loginSchema } from "@/schema/loginSchema";
@@ -59,127 +59,138 @@ export function LoginForm() {
   );
 
   return (
-    <Card className="w-full max-w-md mx-auto shadow-md border border-slate-200">
-      <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-2xl font-bold text-slate-900">
-          Login
-        </CardTitle>
-        <CardDescription className="text-slate-600">
-          Masukkan email dan password Anda
-        </CardDescription>
-      </CardHeader>
+    <div className="w-full max-w-md mx-auto">
+      {/* BACK TO HOMEPAGE BUTTON - OUTSIDE CARD */}
+      <Link
+        href="/"
+        className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700 transition-colors mb-4 font-medium"
+      >
+        <ArrowLeft size={16} />
+        <span>Kembali ke Beranda</span>
+      </Link>
 
-      <CardContent>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="space-y-4"
-          aria-busy={loading}
-        >
-          {/* GLOBAL ERROR */}
-          {errors.root && (
-            <div className="rounded-md bg-red-50 border border-red-200 px-3 py-2 text-sm text-red-700 flex items-center gap-2">
-              <span>⚠️</span>
-              <span>{errors.root.message}</span>
-            </div>
-          )}
+      <Card className="w-full shadow-md border border-slate-200">
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-2xl font-bold text-slate-900">
+            Login
+          </CardTitle>
+          <CardDescription className="text-slate-600">
+            Masukkan email dan password Anda
+          </CardDescription>
+        </CardHeader>
 
-          {/* EMAIL */}
-          <FieldGroup>
-            <Field>
-              <FieldLabel>Email</FieldLabel>
-              <Input
-                type="email"
-                placeholder="email@example.com"
-                disabled={loading}
-                {...register("email", {
-                  onChange: () => clearErrors("root"),
-                })}
-              />
-              {errors.email && (
-                <p className="text-sm text-red-600 mt-1">
-                  {errors.email.message}
-                </p>
-              )}
-            </Field>
-          </FieldGroup>
+        <CardContent>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-4"
+            aria-busy={loading}
+          >
+            {/* GLOBAL ERROR */}
+            {errors.root && (
+              <div className="rounded-md bg-red-50 border border-red-200 px-3 py-2 text-sm text-red-700 flex items-center gap-2">
+                <span>⚠️</span>
+                <span>{errors.root.message}</span>
+              </div>
+            )}
 
-          {/* PASSWORD */}
-          <FieldGroup>
-            <Field>
-              <FieldLabel>Password</FieldLabel>
-
-              <div className="relative">
+            {/* EMAIL */}
+            <FieldGroup>
+              <Field>
+                <FieldLabel>Email</FieldLabel>
                 <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
+                  type="email"
+                  placeholder="email@example.com"
                   disabled={loading}
-                  {...register("password", {
+                  {...register("email", {
                     onChange: () => clearErrors("root"),
                   })}
-                  className="pr-10"
                 />
+                {errors.email && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </Field>
+            </FieldGroup>
 
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                  disabled={loading}
-                  className="
+            {/* PASSWORD */}
+            <FieldGroup>
+              <Field>
+                <FieldLabel>Password</FieldLabel>
+
+                <div className="relative">
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    disabled={loading}
+                    {...register("password", {
+                      onChange: () => clearErrors("root"),
+                    })}
+                    className="pr-10"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    disabled={loading}
+                    className="
   absolute right-3 top-1/2 -translate-y-1/2
   text-slate-500 hover:text-slate-700
   disabled:opacity-50
 "
-                  aria-label="Toggle password visibility"
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
+                    aria-label="Toggle password visibility"
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
 
-              {errors.password && (
-                <p className="text-sm text-red-600 mt-1">
-                  {errors.password.message}
-                </p>
-              )}
-            </Field>
-          </FieldGroup>
+                {errors.password && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
+              </Field>
+            </FieldGroup>
 
-          {/* LUPA PASSWORD */}
-          <div className="flex justify-end -mt-2">
-            <Link
-              href="/forgot-password"
-              className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
-            >
-              Lupa password?
-            </Link>
-          </div>
+            {/* LUPA PASSWORD */}
+            <div className="flex justify-end -mt-2">
+              <Link
+                href="/forgot-password"
+                className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
+              >
+                Lupa password?
+              </Link>
+            </div>
 
-          {/* LOGIN BUTTON */}
-          <Button
-            type="submit"
-            disabled={loading}
-            className="
+            {/* LOGIN BUTTON */}
+            <Button
+              type="submit"
+              disabled={loading}
+              className="
     w-full mt-2
     bg-blue-600 hover:bg-blue-700
     text-white font-medium
   "
-          >
-            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {loading ? "Loading..." : "Login"}
-          </Button>
-
-          {/* GOOGLE LOGIN */}
-          <GoogleLoginButton />
-
-          <div className="text-center text-sm text-neutral-600">
-            Belum punya akun?{" "}
-            <Link
-              href="/signup"
-              className="text-blue-600 hover:text-blue-700 hover:underline"
             >
-              Sign up
-            </Link>
-          </div>
-        </form>
-      </CardContent>
-    </Card>
+              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {loading ? "Loading..." : "Login"}
+            </Button>
+
+            {/* GOOGLE LOGIN */}
+            <GoogleLoginButton />
+
+            <div className="text-center text-sm text-neutral-600">
+              Belum punya akun?{" "}
+              <Link
+                href="/signup"
+                className="text-blue-600 hover:text-blue-700 hover:underline"
+              >
+                Sign up
+              </Link>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

@@ -141,23 +141,28 @@ export default function FoundReportAdminTable() {
                   <TableHead className="w-[40px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     No
                   </TableHead>
-                  <TableHead className="w-[40px] text-center text-xs font-semibold uppercase text-muted-foreground">
+
+                  <TableHead className="w-[200px] text-left text-xs font-semibold uppercase text-muted-foreground">
                     Barang
                   </TableHead>
 
-                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[260px] text-left text-xs font-semibold uppercase text-muted-foreground">
                     Deskripsi
                   </TableHead>
-                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+
+                  <TableHead className="w-[160px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Lokasi
                   </TableHead>
-                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+
+                  <TableHead className="w-[180px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Pelapor
                   </TableHead>
-                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+
+                  <TableHead className="w-[120px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Status
                   </TableHead>
-                  <TableHead className="w-[60px] text-center text-xs font-semibold uppercase text-muted-foreground">
+
+                  <TableHead className="w-[140px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Aksi
                   </TableHead>
                 </TableRow>
@@ -165,47 +170,60 @@ export default function FoundReportAdminTable() {
 
               <TableBody>
                 {reports.map((report, idx) => (
-                  <TableRow key={report.id}>
-                    <TableCell className="text-center">
+                  <TableRow key={report.id} className="align-top">
+                    {/* No */}
+                    <TableCell className="w-[40px] text-center align-top">
                       {(currentPage - 1) * rowLimit + (idx + 1)}
                     </TableCell>
 
-                    <TableCell className="align-top">
-                      <p className="font-medium text-sm break-words whitespace-normal line-clamp-2">
+                    {/* Barang */}
+                    <TableCell className="w-[200px] align-top">
+                      <p className="text-sm font-medium break-words whitespace-normal line-clamp-2">
                         {getNamaBarang(report)}
                       </p>
                     </TableCell>
 
-                    <TableCell className="text-center align-top">
+                    {/* Deskripsi */}
+                    <TableCell className="w-[260px] align-top">
                       <p className="text-sm text-slate-600 break-words whitespace-normal line-clamp-3">
                         {getDeskripsi(report)}
                       </p>
                     </TableCell>
 
-                    <TableCell className="text-center align-top">
-                      <div className="flex justify-center items-center gap-1 text-muted-foreground">
+                    {/* Lokasi */}
+                    <TableCell className="w-[160px] align-top">
+                      <div className="flex items-center justify-center gap-1 text-sm text-muted-foreground">
                         <MapPin className="h-4 w-4 shrink-0" />
-                        {getLokasi(report)}
+                        <span className="break-words whitespace-normal line-clamp-2">
+                          {getLokasi(report)}
+                        </span>
                       </div>
                     </TableCell>
 
-                    <TableCell className="text-center">
+                    {/* Pelapor */}
+                    <TableCell className="w-[180px] align-top">
                       <div className="flex justify-center gap-2">
-                        <Avatar className="h-8 w-8">
+                        <Avatar className="h-8 w-8 shrink-0">
                           <AvatarFallback>
                             {getAvatarLetter(report)}
                           </AvatarFallback>
                         </Avatar>
-                        <div>
-                          <p className="text-sm">{getPelapor(report)}</p>
+
+                        <div className="text-left">
+                          <p className="text-sm leading-tight">
+                            {getPelapor(report)}
+                          </p>
                           {getTelp(report) && (
-                            <p className="text-xs">{getTelp(report)}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {getTelp(report)}
+                            </p>
                           )}
                         </div>
                       </div>
                     </TableCell>
 
-                    <TableCell className="text-center">
+                    {/* Status */}
+                    <TableCell className="w-[120px] text-center align-top">
                       <Badge
                         variant={getStatusBadge(report.statusFound).variant}
                       >
@@ -213,7 +231,8 @@ export default function FoundReportAdminTable() {
                       </Badge>
                     </TableCell>
 
-                    <TableCell className="text-center">
+                    {/* Aksi */}
+                    <TableCell className="w-[140px] text-center align-top">
                       <div className="flex justify-center gap-2">
                         <Button
                           size="icon"

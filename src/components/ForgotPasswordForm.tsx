@@ -86,8 +86,7 @@ export function ForgotPasswordForm() {
 
             <div className="flex flex-col gap-3">
               <Button
-                variant="outline"
-                className="border-blue-200 bg-blue-50 text-blue-800"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium"
                 onClick={() => setIsSuccess(false)}
               >
                 Kirim Ulang Email

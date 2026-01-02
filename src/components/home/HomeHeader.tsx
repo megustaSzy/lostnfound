@@ -16,14 +16,19 @@ export function HomeHeader() {
             <Link href="/login">
               <Button
                 variant="outline"
-                className="h-9 px-4 border-blue-600 text-blue-600 hover:bg-blue-50 text-sm sm:text-base"
+                className="h-10 min-w-[96px] px-5 text-sm sm:text-base
+                           border-blue-600 text-blue-600 hover:bg-blue-50
+                           font-semibold"
               >
                 Login
               </Button>
             </Link>
 
             <Link href="/signup">
-              <Button className="h-9 px-4 sm:h-10 sm:px-5 font-bold bg-blue-600 hover:bg-blue-700 text-sm sm:text-base">
+              <Button
+                className="h-10 min-w-[96px] px-5 text-sm sm:text-base
+                           font-semibold bg-blue-600 hover:bg-blue-700"
+              >
                 Sign Up
               </Button>
             </Link>

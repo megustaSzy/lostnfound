@@ -181,16 +181,14 @@ export default function FoundReportAdminTable() {
                         {getDeskripsi(report)}
                       </p>
                     </TableCell>
-
-                    <TableCell className="text-center align-top">
-                      <div className="flex justify-center items-center gap-1 text-slate-600 font-semibold">
+                    <TableCell className="text-center">
+                      <div className="flex justify-center items-center gap-1 text-sm font-medium text-muted-foreground">
                         <MapPin className="h-4 w-4 shrink-0" />
                         <span className="break-words whitespace-normal line-clamp-2">
                           {getLokasi(report)}
                         </span>
                       </div>
                     </TableCell>
-
                     <TableCell className="text-center">
                       <div className="flex justify-center gap-2">
                         <Avatar className="h-8 w-8">

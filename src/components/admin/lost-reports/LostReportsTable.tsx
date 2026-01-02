@@ -186,7 +186,7 @@ export default function LostReportsTable() {
 
                     {/* BARANG */}
                     <TableCell className="align-top text-left">
-                      <p className="font-medium text-sm break-words line-clamp-2">
+                      <p className="font-medium text-sm break-words line-clamp-2 text-center">
                         {r.namaBarang}
                       </p>
                     </TableCell>

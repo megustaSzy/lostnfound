@@ -147,11 +147,6 @@ export function AppSidebar({ role, user }: AppSidebarProps) {
             <span className="text-xs text-slate-500">
               {user?.email || "No email"}
             </span>
-
-            {/* Debug imageUrl */}
-            <pre className="text-xs text-red-500">
-              DEBUG imageUrl: {JSON.stringify(user?.imageUrl)}
-            </pre>
           </div>
         </div>
       </SidebarFooter>

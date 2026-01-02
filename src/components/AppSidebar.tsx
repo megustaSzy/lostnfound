@@ -67,7 +67,6 @@ export function AppSidebar({ role, user }: AppSidebarProps) {
           </div>
         </div>
       </SidebarHeader>
-
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
@@ -126,14 +125,19 @@ export function AppSidebar({ role, user }: AppSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-
       <SidebarFooter className="border-t p-4">
         <div className="flex items-center gap-3 rounded-lg px-3 py-2">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={user?.avatar} alt={user?.name} />
-            <AvatarFallback className="bg-slate-200 text-slate-700">
-              {user?.name?.charAt(0).toUpperCase() || "U"}
-            </AvatarFallback>
+            {user?.imageUrl ? (
+              <AvatarImage
+                src={user.imageUrl}
+                alt={user.name || "User Avatar"}
+              />
+            ) : (
+              <AvatarFallback className="bg-slate-200 text-slate-700">
+                {user?.name?.charAt(0).toUpperCase() || "U"}
+              </AvatarFallback>
+            )}
           </Avatar>
 
           <div className="flex flex-col text-sm">
@@ -161,7 +165,7 @@ export function DashboardLayout({
   user?: {
     name: string;
     email: string;
-    avatar?: string;
+    imageUrl?: string;
   };
 }) {
   return (

@@ -18,6 +18,6 @@ export interface AppSidebarProps {
   user?: {
     name: string;
     email: string;
-    avatar?: string;
+    imageUrl?: string;
   } | null;  // ⬅️ tambahkan null
 }

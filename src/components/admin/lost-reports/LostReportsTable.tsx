@@ -167,10 +167,10 @@ export default function LostReportsTable() {
                   <TableHead className="w-[140px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Tanggal
                   </TableHead>
-                  <TableHead className="w-[110px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[100px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Status
                   </TableHead>
-                  <TableHead className="w-[130px] text-center text-xs font-semibold uppercase text-muted-foreground">
+                  <TableHead className="w-[110px] text-center text-xs font-semibold uppercase text-muted-foreground">
                     Aksi
                   </TableHead>
                 </TableRow>
@@ -211,7 +211,13 @@ export default function LostReportsTable() {
 
                     {/* TANGGAL */}
                     <TableCell className="text-center">
-                      {formatDate(r.tanggal ?? r.createdAt)}
+                      <p className="text-xs font-medium text-muted-foreground">
+                        {r.tanggal
+                          ? formatDate(r.tanggal)
+                          : r.createdAt
+                          ? formatDate(r.createdAt)
+                          : "-"}
+                      </p>
                     </TableCell>
 
                     {/* STATUS */}

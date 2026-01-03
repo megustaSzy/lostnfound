@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserActions } from "@/components/admin/users/UsersAction";
+import { FileSearch } from "lucide-react";
 
 interface UsersTableProps {
   users?: any[];
@@ -133,14 +134,12 @@ export function UsersTable({
                 </TableRow>
               ))
             ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={6}
-                  className="h-32 text-center text-sm text-muted-foreground"
-                >
+              <div className="flex flex-col items-center justify-center py-14 text-center">
+                <FileSearch className="mb-4 h-12 w-12 text-muted-foreground" />
+                <p className="text-sm text-muted-foreground">
                   Tidak ada data user
-                </TableCell>
-              </TableRow>
+                </p>
+              </div>
             )}
           </TableBody>
         </Table>
